@@ -1,0 +1,181 @@
+/* Paleta de Cores Adicionais */
+:root {
+    --light-blue: #e0f7fa; /* Um azul bem claro */
+    --dark-blue: #00bcd4; /* Um azul um pouco mais escuro para o hover */
+}
+
+/* Presentation Section */
+.presentation-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    background-color: #ffffff; /* Fundo branco */
+    border-radius: 20px; /* Mais arredondado */
+    margin-top: 20px;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.profile-pic {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border: 4px solid #fff;
+}
+
+.presentation-text {
+    max-width: 600px;
+}
+
+.presentation-text h1 {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.presentation-text .lead {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.specialties {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.specialties li {
+    background-color: var(--secondary-color); /* Usando a cor secundária para as tags */
+    color: white;
+    border-radius: 15px; /* Mais arredondado */
+    padding: 8px 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+.btn-schedule {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 30px; /* Botão maior */
+    border-radius: 30px; /* Mais arredondado */
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.btn-schedule:hover {
+    background-color: #004c5a; /* Um tom mais escuro de azul */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .presentation-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-pic {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+/* Cards na Página Inicial */
+.card {
+    border: none;
+    border-radius: 15px; /* Mais arredondado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Transição para o hover */
+    background-color: var(--light-blue); /* Cor de fundo azul clara */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: var(--dark-blue); /* Cor de fundo azul mais escura no hover */
+    color: white; /* Texto branco no hover */
+}
+
+.card-title {
+    color: var(--primary-color); /* Cor do título */
+}
+
+.card:hover .card-title {
+    color: white; /* Título branco no hover */
+}
+
+.card-text {
+    color: var(--text-color); /* Cor do texto */
+}
+
+.card:hover .card-text {
+    color: white; /* Texto branco no hover */
+}
+
+/* Time Slot Buttons */
+.time-slot-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.time-slot-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.time-slot-button.selected {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+/* Animações de Sentimentos */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-in-out {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-1px); }
+    20%, 40%, 60%, 80% { transform: translateX(1px); }
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(0.5deg); }
+    75% { transform: rotate(-0.5deg); }
+}
+
+.specialties li.ansiedade:hover {
+    animation: pulse 1s infinite ease-in-out;
+}
+
+.specialties li.depressao:hover {
+    animation: fade-in-out 2.5s infinite ease-in-out;
+}
+
+.specialties li.estresse:hover {
+    animation: shake 0.3s infinite;
+}
+
+.specialties li.relacionamentos:hover {
+    animation: sway 1.8s infinite ease-in-out;
+}

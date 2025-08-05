@@ -1,0 +1,219 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const appointmentModal = document.getElementById('appointmentModal');
+    const scheduleBtn = document.getElementById('scheduleBtn');
+    const closeAppointment = document.getElementById('appointmentModalClose'); // Use the specific ID
+    const dateInput = document.getElementById('appointmentDate');
+    const timeSlotsContainer = document.getElementById('timeSlots');
+    const appointmentForm = document.getElementById('appointmentForm');
+    const confirmAppointmentBtn = appointmentForm.querySelector('button[type="submit"]');
+
+    const onlineAppointmentRadio = document.getElementById('onlineAppointment');
+    const presentialAppointmentRadio = document.getElementById('presentialAppointment');
+    const appointmentValueGroup = document.getElementById('appointmentValueGroup');
+    const appointmentValueInput = document.getElementById('appointmentValue');
+
+    function updateAppointmentValue() {
+        if (onlineAppointmentRadio.checked) {
+            appointmentValueInput.value = 'R$ 100,00';
+            appointmentValueGroup.style.display = 'block';
+        } else if (presentialAppointmentRadio.checked) {
+            appointmentValueInput.value = 'R$ 180,00';
+            appointmentValueGroup.style.display = 'block';
+        } else {
+            appointmentValueInput.value = '';
+            appointmentValueGroup.style.display = 'none';
+        }
+    }
+
+    onlineAppointmentRadio.addEventListener('change', updateAppointmentValue);
+    presentialAppointmentRadio.addEventListener('change', updateAppointmentValue);
+
+    let fp; // flatpickr instance
+
+    // Inicialização do flatpickr
+    fp = flatpickr(dateInput, {
+        minDate: 'today',
+        dateFormat: 'd/m/Y',
+        locale: 'pt',
+        onChange: function(selectedDates) {
+            if (selectedDates.length > 0) {
+                generateTimeSlots(selectedDates[0]);
+            }
+        },
+        onOpen: function() {
+            timeSlotsContainer.innerHTML = '';
+            timeSlotsContainer.style.display = 'none';
+        }
+    });
+
+    // Função para habilitar/desabilitar campos do modal de agendamento
+    window.setAppointmentModalEnabled = function(enabled) {
+        if (fp) {
+            fp.set('clickOpens', enabled); // Controla se o flatpickr pode ser aberto
+        }
+        dateInput.disabled = !enabled;
+        confirmAppointmentBtn.disabled = !enabled;
+        // Adicionar/remover classe para feedback visual de desabilitado
+        appointmentModal.classList.toggle('modal-disabled-overlay', !enabled);
+        // Desabilitar/habilitar botões de horário se existirem
+        const timeSlotButtons = timeSlotsContainer.querySelectorAll('.time-slot-button');
+        timeSlotButtons.forEach(button => {
+            button.disabled = !enabled;
+        });
+    };
+
+    // Verificar se o modal de agendamento deve ser reaberto após o login
+    const openModalFlag = localStorage.getItem('openAppointmentModalAfterLogin');
+    if (openModalFlag === 'true') {
+        appointmentModal.style.display = 'block';
+        window.setAppointmentModalEnabled(true);
+        localStorage.removeItem('openAppointmentModalAfterLogin'); // Limpar a flag
+    }
+
+    function generateTimeSlots(selectedDate) {
+        timeSlotsContainer.innerHTML = '';
+        const day = selectedDate.getDay();
+
+        if (day > 0 && day < 6) { // Monday to Friday
+            for (let hour = 9; hour <= 17; hour++) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'btn time-slot-button';
+                button.textContent = `${hour.toString().padStart(2, '0')}:00`;
+                
+                button.onclick = function() {
+                    const finalDate = new Date(selectedDate);
+                    finalDate.setHours(hour, 0, 0, 0);
+                    
+                    // Use a hidden input to store the ISO string for the backend
+                    document.getElementById('hiddenAppointmentDate').value = finalDate.toISOString();
+                    
+                    dateInput.value = finalDate.toLocaleString('pt-BR', {
+                        year: 'numeric', month: '2-digit', day: '2-digit',
+                        hour: '2-digit', minute: '2-digit'
+                    }).replace(',', '');
+
+                    timeSlotsContainer.innerHTML = '';
+                    timeSlotsContainer.style.display = 'none';
+                };
+                timeSlotsContainer.appendChild(button);
+            }
+        } else {
+            timeSlotsContainer.innerHTML = '<p class="text-center text-muted">Não há horários disponíveis para este dia.</p>';
+        }
+        timeSlotsContainer.style.display = 'block';
+    }
+
+    if (scheduleBtn) {
+        scheduleBtn.onclick = function (event) {
+            event.preventDefault();
+            const isAuthenticated = document.getElementById('isAuthenticated').value === 'true';
+
+            appointmentModal.style.display = 'block';
+            dateInput.value = '';
+            timeSlotsContainer.innerHTML = '';
+            timeSlotsContainer.style.display = 'none';
+
+            if (!isAuthenticated) {
+                window.setAppointmentModalEnabled(false);
+                Swal.fire({
+                    title: 'Atenção!',
+                    text: 'Você precisa estar logado para agendar uma consulta. Por favor, faça login.',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    document.getElementById('loginModal').style.display = 'block';
+                });
+            } else {
+                window.setAppointmentModalEnabled(true);
+            }
+        }
+    }
+
+    function closeModal() {
+        appointmentModal.style.display = 'none';
+        if (fp) fp.clear();
+    }
+
+    if (closeAppointment) {
+        closeAppointment.onclick = closeModal;
+    }
+
+    window.addEventListener('click', function (event) {
+        if (event.target == appointmentModal) {
+            closeModal();
+        }
+    });
+
+    appointmentForm.onsubmit = async function(event) {
+        event.preventDefault();
+        const hiddenDate = document.getElementById('hiddenAppointmentDate').value;
+        const selectedAppointmentType = document.querySelector('input[name="appointmentType"]:checked');
+
+        if (!hiddenDate || !selectedAppointmentType) {
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Por favor, selecione uma data, hora e o tipo de consulta.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        const data = { dataHora: hiddenDate, tipoConsulta: selectedAppointmentType.value };
+
+        try {
+            const response = await fetch('/Agendamento/Salvar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success) {
+                    Swal.fire({
+                        title: 'Sucesso!',
+                        text: result.message,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                    closeModal();
+                } else {
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: result.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            } else if (response.status === 401) { // Unauthorized
+                Swal.fire({
+                    title: 'Não Autenticado!',
+                    text: 'Você precisa estar logado para agendar uma consulta.',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.href = '/Login'; // Redireciona para a página de login
+                });
+            } else {
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao salvar a consulta. Por favor, tente novamente.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        } catch (error) {
+            console.error('Erro ao enviar o formulário:', error);
+            Swal.fire({
+                title: 'Erro de Comunicação!',
+                text: 'Não foi possível conectar ao servidor. Por favor, tente novamente.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    };
+});

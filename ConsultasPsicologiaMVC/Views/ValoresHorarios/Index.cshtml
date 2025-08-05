@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Gestão de Valores e Horários";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-light text-dark">
+                    <h3 class="mb-0">Configuração de Horários por Dia da Semana</h3>
+                </div>
+                <div class="card-body bg-white">
+                    @{
+                        var diasDaSemana = new List<Tuple<int, string>>
+                        {
+                            Tuple.Create(1, "Segunda-feira"),
+                            Tuple.Create(2, "Terça-feira"),
+                            Tuple.Create(3, "Quarta-feira"),
+                            Tuple.Create(4, "Quinta-feira"),
+                            Tuple.Create(5, "Sexta-feira"),
+                            Tuple.Create(6, "Sábado"),
+                            Tuple.Create(0, "Domingo") // Domingo é 0 em muitas convenções
+                        };
+                    }
+
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        @foreach (var dia in diasDaSemana)
+                        {
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link @(dia.Item1 == 1 ? "active" : "")" id="pills-@dia.Item1-tab" data-bs-toggle="pill" data-bs-target="#pills-@dia.Item1" type="button" role="tab" aria-controls="pills-@dia.Item1" aria-selected="@(dia.Item1 == 1 ? "true" : "false")">
+                                    @dia.Item2
+                                </button>
+                            </li>
+                        }
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        @foreach (var dia in diasDaSemana)
+                        {
+                            <div class="tab-pane fade @(dia.Item1 == 1 ? "show active" : "")" id="pills-@dia.Item1" role="tabpanel" aria-labelledby="pills-@dia.Item1-tab">
+                                <div class="p-3 border rounded bg-light">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="inicioAtendimento-@dia.Item1" class="form-label">Início do Atendimento</label>
+                                            <input type="time" class="form-control" id="inicioAtendimento-@dia.Item1" value="09:00">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="fimAtendimento-@dia.Item1" class="form-label">Fim do Atendimento</label>
+                                            <input type="time" class="form-control" id="fimAtendimento-@dia.Item1" value="18:00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <button type="submit" class="btn btn-primary">Salvar Configurações</button>
+                        <button type="button" class="btn btn-secondary">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Bootstrap Pills são inicializadas automaticamente com data-bs-toggle="pill"
+        // Não é necessário JavaScript adicional para a funcionalidade básica das abas.
+        AOS.init({ disable: true });
+    </script>
+}

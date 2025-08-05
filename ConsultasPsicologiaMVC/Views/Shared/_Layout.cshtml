@@ -1,0 +1,213 @@
+@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Consultas Psicológicas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/modal.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/clareza-clinica.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/ConsultasPsicologiaMVC.styles.css" asp-append-version="true" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <input type="hidden" id="isAuthenticated" value="@User.Identity.IsAuthenticated.ToString().ToLower()" />
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-brain"></i> ConsultasPsi
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Página Inicial</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated && User.Identity.Name == "caroline.adm@adm.com")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">
+                                    <i class="fas fa-cog"></i> Gestão de Pacientes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Consulta" asp-action="Index">
+                                    <i class="fas fa-calendar-alt"></i> Gestão de Consulta
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="ValoresHorarios" asp-action="Index">
+                                    <i class="fas fa-money-bill-wave"></i> Gestão de Valores e Horários
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fas fa-question-circle"></i> Sobre</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav me-3">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item me-2">
+                                <span class="nav-link text-white">Olá, @User.Identity.Name</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light btn-lg" href="#" id="logoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i> Sair
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-2">
+                                <a class="nav-link btn btn-lg" href="#" id="cadastroBtn">
+                                    <i class="fas fa-user-plus"></i> Cadastre-se
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light btn-lg" href="#" id="loginBtn">
+                                    <i class="fas fa-sign-in-alt"></i> Entrar
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="loginModalClose">&times;</span>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="emailLogin" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailLogin" name="Email" placeholder="seuemail@exemplo.com">
+                </div>
+                <div class="mb-3">
+                    <label for="senhaLogin" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="senhaLogin" name="Senha" placeholder="Sua senha">
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="#" id="openCadastroFromLogin">Não tem uma conta? Cadastre-se</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="cadastroModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="cadastroModalClose">&times;</span>
+            <h2>Cadastro de Usuário</h2>
+            <form id="cadastroForm">
+                <div class="mb-3">
+                    <label for="nomePaciente" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nomePaciente" name="Nome" aria-describedby="nomePac">
+                    <div id="nomePac" class="form-text">Digite seu primeiro nome.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="sobrenomePaciente" class="form-label">Sobrenome</label>
+                    <input type="text" class="form-control" id="sobrenomePaciente" name="Sobrenome" aria-describedby="sobrenomePac">
+                    <div id="sobrenomePac" class="form-text">Digite seus sobrenomes</div>
+                </div>
+                <div class="mb-3">
+                    <label for="dataNascimento" class="form-label">Data Nascimento</label>
+                    <input type="text" class="form-control" id="dataNascimento" name="DataNascimento" aria-describedby="dataNascPac" placeholder="DD/MM/AAAA">
+                    <div id="dataNascPac" class="form-text">Utilize o formato DD/MM/AAAA</div>
+                </div>
+                <div class="mb-3">
+                    <label for="emailPaciente" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailPaciente" name="Email" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text"></div>
+                </div>
+                <div class="mb-3 position-relative">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="senha" name="Senha">
+                    <button type="button" class="btn btn-sm position-absolute end-0 top-50 translate-middle-y me-2" id="togglePassword1" style="z-index: 100;"><i class="fas fa-eye"></i></button>
+                    <div id="emailHelp" class="form-text">Sua senha deverá conter letras e números</div>
+                </div>
+                <div class="mb-3 position-relative">
+                    <label for="redigitarSenha" class="form-label">Digite novamente sua senha</label>
+                    <input type="password" class="form-control" id="redigitarSenha" name="SenhaDigitadaNovamente">
+                    <button type="button" class="btn btn-sm position-absolute end-0 top-50 translate-middle-y" id="togglePassword2" style="z-index: 100;"><i class="fas fa-eye"></i></button>
+                    <div id="passwordMatchError" class="text-danger"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="appointmentModalClose">&times;</span>
+            <h2 id="appointmentModalTitle">Agende sua Consulta</h2>
+            <form id="appointmentForm">
+                <div class="mb-3">
+                    <label>Tipo de Consulta:</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="appointmentType" id="onlineAppointment" value="online">
+                        <label class="form-check-label" for="onlineAppointment">Virtual</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="appointmentType" id="presentialAppointment" value="presential">
+                        <label class="form-check-label" for="presentialAppointment">Presencial</label>
+                    </div>
+                </div>
+                <input type="hidden" id="hiddenAppointmentDate">
+                <div class="mb-3">
+                    <label for="appointmentDate" class="form-label">Selecione a Data e Hora</label>
+                    <input type="text" class="form-control" id="appointmentDate" placeholder="Escolha uma data...">
+                    <div id="timeSlots" class="mt-3"></div>
+                </div>
+                <div class="mb-3" id="appointmentValueGroup" style="display: none;">
+                    <label for="appointmentValue">Valor da Consulta:</label>
+                    <input type="text" id="appointmentValue" class="form-control" readonly>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirmar Agendamento</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <main class="flex-grow-1 main-content-padding">
+        <div class="container mt-4">
+            @RenderBody()
+        </div>
+    </main>
+
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/modal.js" asp-append-version="true"></script>
+    <script src="~/js/cadastro.js" asp-append-version="true"></script>
+    <script src="~/js/login.js" asp-append-version="true"></script>
+    <script src="~/js/appointment.js" asp-append-version="true"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

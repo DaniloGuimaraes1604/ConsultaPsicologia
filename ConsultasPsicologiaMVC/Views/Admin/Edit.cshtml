@@ -1,0 +1,47 @@
+@model ConsultasPsicologiaMVC.Models.PacienteEditViewModel
+
+@{
+    ViewData["Title"] = "Editar Paciente";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Editar Paciente</h1>
+
+            <form asp-action="Edit" method="post">
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input asp-for="Email" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="NomeCompleto">Nome Completo</label>
+                    <input asp-for="NomeCompleto" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="DataNascimento">Data de Nascimento</label>
+                    <input asp-for="DataNascimento" class="form-control" type="date" />
+                </div>
+                <div class="form-group">
+                    <label for="QuantidadeConsultas">Quantidade de Consultas</label>
+                    <input asp-for="QuantidadeConsultas" class="form-control" type="number" />
+                </div>
+                <div class="form-group">
+                    <label for="NotaPaciente">Nota do Paciente: <span id="notaPacienteValue">@Model.NotaPaciente</span></label>
+                    <input asp-for="NotaPaciente" class="form-control" type="range" min="0" max="5" step="0.1" oninput="document.getElementById('notaPacienteValue').innerText = this.value" />
+                </div>
+                <div class="form-group">
+                    <label for="Observacao">Observação</label>
+                    <textarea asp-for="Observacao" class="form-control"></textarea>
+                </div>
+                <div class="form-group form-check">
+                    <input asp-for="PacienteBloqueado" class="form-check-input" type="checkbox" />
+                    <label for="PacienteBloqueado" class="form-check-label">Paciente Bloqueado</label>
+                </div>
+                <div class="mb-3"></div> <!-- Espaço abaixo do Paciente Bloqueado -->
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

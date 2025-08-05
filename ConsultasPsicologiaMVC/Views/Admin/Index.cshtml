@@ -1,0 +1,42 @@
+@model List<ConsultasPsicologiaMVC.Models.PacienteViewModel>
+
+@{
+    ViewData["Title"] = "Gestão de Pacientes";
+}
+
+<h1>Gestão de Pacientes</h1>
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nome Completo</th>
+            <th>Data de Nascimento</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var paciente in Model)
+            {
+                <tr>
+                    <td>@paciente.NomeCompleto</td>
+                    <td>@(paciente.DataNascimento.HasValue ? paciente.DataNascimento.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                    <td>@paciente.Email</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="Edit" asp-route-email="@paciente.Email" class="btn btn-sm btn-primary" title="Editar">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">Nenhum paciente cadastrado.</td>
+            </tr>
+        }
+    </tbody>
+</table>

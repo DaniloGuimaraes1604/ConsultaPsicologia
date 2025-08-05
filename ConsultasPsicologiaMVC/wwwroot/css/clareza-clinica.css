@@ -1,0 +1,142 @@
+/* Estilo "Clareza Clínica" para todos os modais e botões principais */
+
+/* Estilo geral para todos os modais */
+#cadastroModal .modal-content, 
+#loginModal .modal-content, 
+#appointmentModal .modal-content {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fdfdff;
+    color: #2d3748;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    padding: 40px;
+}
+
+/* Títulos dos modais */
+#cadastroModal h2, 
+#loginModal h2, 
+#appointmentModal h2 {
+    text-align: center;
+    font-weight: 500;
+    color: #1a202c;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Labels dos modais */
+#cadastroModal .form-label, 
+#loginModal .form-label, 
+#appointmentModal .form-label {
+    color: #718096;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/* Campos de formulário dos modais */
+#cadastroModal .form-control, 
+#loginModal .form-control, 
+#appointmentModal .form-control {
+    background-color: #fdfdff;
+    border: none;
+    border-bottom: 2px solid #e2e8f0;
+    border-radius: 0;
+    color: #2d3748;
+    padding: 10px 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#cadastroModal .form-control:focus, 
+#loginModal .form-control:focus, 
+#appointmentModal .form-control:focus {
+    border-color: #4299e1;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Texto de ajuda dos modais */
+#cadastroModal .form-text, 
+#loginModal .form-text, 
+#appointmentModal .form-text {
+    color: #a0aec0;
+    font-size: 0.75rem;
+}
+
+/* Botões primários dos modais e botão de agendamento */
+#cadastroModal .btn-primary, 
+#loginModal .btn-primary, 
+#appointmentModal .btn-primary,
+.btn-schedule {
+    background-color: #3182ce;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, transform 0.2s;
+    color: #fff; /* Garante que o texto do botão seja branco */
+}
+
+#cadastroModal .btn-primary:hover, 
+#loginModal .btn-primary:hover, 
+#appointmentModal .btn-primary:hover,
+.btn-schedule:hover {
+    background-color: #2b6cb0;
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* Botões de fechar dos modais */
+#cadastroModal .close, 
+#loginModal .close, 
+#appointmentModal .close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: #a0aec0;
+    font-size: 1.5rem;
+    opacity: 0.8;
+    transition: color 0.2s;
+}
+
+#cadastroModal .close:hover, 
+#loginModal .close:hover, 
+#appointmentModal .close:hover {
+    color: #2d3748;
+}
+
+/* Botões de visualizar senha */
+#cadastroModal .position-relative .btn, 
+#loginModal .position-relative .btn {
+    background: transparent;
+    border: none;
+    color: #a0aec0;
+    transition: color 0.2s;
+}
+
+#cadastroModal .position-relative .btn:hover, 
+#loginModal .position-relative .btn:hover {
+    color: #2d3748;
+}
+
+/* Estilos para os botões do SweetAlert2 */
+.btn-swal-confirm {
+    background-color: #3182ce !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.btn-swal-error {
+    background-color: #e53e3e !important; /* Um vermelho para erros */
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}

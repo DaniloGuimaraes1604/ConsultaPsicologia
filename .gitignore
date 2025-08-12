@@ -1,0 +1,26 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Rider
+.idea/
+
+# User-specific files
+*.DS_Store
+
+# Log files
+log*.txt
+logerroraiz.txt
+
+# Temporary files
+temp_gemini_changes/
+
+# Unnecessary folders
+Piloto/
+CP.Application/
+Consultas/

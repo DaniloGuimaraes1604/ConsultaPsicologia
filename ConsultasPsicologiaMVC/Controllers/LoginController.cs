@@ -120,7 +120,7 @@ namespace ConsultasPsicologiaMVC.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao tentar fazer login para o e-mail: {Email}. InnerException: {InnerException}", model.Email, ex.InnerException?.Message);
-                return Json(new { success = false, message = "Ocorreu um erro ao tentar fazer login." });
+                                return Json(new { success = false, message = "Ocorreu um erro ao tentar fazer login." });
             }
         }
 

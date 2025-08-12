@@ -1,2 +1,0 @@
-C:\Users\danilo.guimaraes\Desktop\Dan\Projeto Piloto Consultas\ConsultasPsicologiaMVC\CP.Application\obj\Debug\CP.Application.csproj.AssemblyReference.cache
-C:\Users\danilo.guimaraes\Desktop\Dan\Projeto Piloto Consultas\ConsultasPsicologiaMVC\CP.Application\obj\Debug\CP.Application.csproj.CoreCompileInputs.cache

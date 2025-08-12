@@ -6,6 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ConsultasPsicologiaMVC.DAO.Interfaces; // Added
+using Microsoft.AspNetCore.Mvc.Rendering; // Added
+using Microsoft.AspNetCore.Mvc.ViewEngines; // Added
+using Microsoft.AspNetCore.Mvc.ViewFeatures; // Added
+using System.IO; // Added
+using System; // Added
+using Microsoft.Extensions.DependencyInjection; // Added
 
 namespace ConsultasPsicologiaMVC.Controllers
 {
@@ -13,43 +20,74 @@ namespace ConsultasPsicologiaMVC.Controllers
     public class AdminController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IAdminDao _adminDao; // Added
 
-        public AdminController(AppDbContext context)
+        public AdminController(AppDbContext context, IAdminDao adminDao) // Modified constructor
         {
             _context = context;
+            _adminDao = adminDao; // Initialized
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            // Verifica se o usuário logado é o master
-            if (User.Identity?.IsAuthenticated == true && User.Identity?.Name == "caroline.adm@adm.com")
-            {
-                var pacientes = new List<PacienteViewModel>();
-                var connectionString = _context.Database.GetDbConnection().ConnectionString;
+            // Initial load will be handled by AJAX call from admin.js
+            return View();
+        }
 
-                using (var connection = new NpgsqlConnection(connectionString))
-                {
-                    await connection.OpenAsync();
-                    var sql = "SELECT nome AS NomeCompleto, datanascimento, email FROM usuariopaciente";
-                    using (var command = new NpgsqlCommand(sql, connection))
-                    {
-                        using (var reader = await command.ExecuteReaderAsync())
-                        {
-                            while (await reader.ReadAsync())
-                            {
-                                pacientes.Add(new PacienteViewModel
-                                {
-                                    NomeCompleto = reader.GetString(0),
-                                    DataNascimento = reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1),
-                                    Email = reader.GetString(2)
-                                });
-                            }
-                        }
-                    }
-                }
-                return View(pacientes);
+        [HttpGet]
+        public IActionResult GetPacientes(
+            int page = 1,
+            int pageSize = 15,
+            string? nomeCompleto = null, // Made nullable
+            string? nomeCompletoType = null, // Made nullable
+            string? dataNascimento = null, // Made nullable
+            string? dataNascimentoType = null, // Made nullable
+            string? email = null, // Made nullable
+            string? emailType = null) // Made nullable
+        {
+            var (pacientes, totalCount) = _adminDao.GetFilteredAndPagedPacientes(
+                page,
+                pageSize,
+                nomeCompleto,
+                nomeCompletoType,
+                dataNascimento,
+                dataNascimentoType,
+                email,
+                emailType
+            );
+
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            return Json(new { 
+                html = RenderPartialViewToString("_PacienteTableRows", pacientes),
+                totalPages = totalPages
+            });
+        }
+
+        private string RenderPartialViewToString(string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.ActionDescriptor.ActionName;
+
+            ViewData.Model = model;
+
+            using (var writer = new StringWriter())
+            {
+                IViewEngine viewEngine = HttpContext.RequestServices.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine;
+                ViewEngineResult viewResult = viewEngine.FindView(ControllerContext, viewName, false);
+
+                ViewContext viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    ViewData,
+                    TempData,
+                    writer,
+                    new HtmlHelperOptions()
+                );
+
+                viewResult.View.RenderAsync(viewContext).Wait();
+                return writer.GetStringBuilder().ToString();
             }
-            return Forbid(); // Acesso negado para usuários não-master
         }
 
         [HttpGet]

@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAdminDao, ConsultasPsicologiaMVC.DAO.Implementations.AdminDao>(); // Added
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -27,6 +29,8 @@ builder.Services.AddSession(options =>
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));//conexao com banco
+
+builder.Services.AddScoped<System.Data.IDbConnection>(sp => new Npgsql.NpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"))); // Added
 
 var app = builder.Build();
 

@@ -1,7 +1,7 @@
 /* Paleta de Cores Adicionais */
 :root {
-    --light-blue: #e0f7fa; /* Um azul bem claro */
-    --dark-blue: #00bcd4; /* Um azul um pouco mais escuro para o hover */
+    --light-blue: #FFFFFF; /* White for sections */
+    --dark-blue: #E0FFE0; /* Very light green for hover */
 }
 
 /* Presentation Section */
@@ -10,11 +10,11 @@
     align-items: center;
     justify-content: center;
     padding: 50px 20px;
-    background-color: #ffffff; /* Fundo branco */
-    border-radius: 20px; /* Mais arredondado */
+    background-color: var(--light-blue);
+    border-radius: 20px;
     margin-top: 20px;
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    box-shadow: var(--box-shadow);
 }
 
 .profile-pic {
@@ -23,8 +23,8 @@
     border-radius: 50%;
     object-fit: cover;
     margin-right: 40px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    border: 4px solid #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 4px solid var(--primary-color);
 }
 
 .presentation-text {
@@ -49,18 +49,19 @@
 
 .specialties li {
     background-color: var(--secondary-color); /* Usando a cor secundária para as tags */
-    color: white;
+    color: var(--light-text-color);
     border-radius: 15px; /* Mais arredondado */
     padding: 8px 15px;
     margin-right: 10px;
     margin-bottom: 10px;
     display: inline-block;
     font-size: 0.9rem;
+    transition: all 0.3s ease;
 }
 
 .btn-schedule {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--light-text-color);
     padding: 15px 30px; /* Botão maior */
     border-radius: 30px; /* Mais arredondado */
     font-weight: 500;
@@ -69,7 +70,7 @@
 }
 
 .btn-schedule:hover {
-    background-color: #004c5a; /* Um tom mais escuro de azul */
+    background-color: #43A047;
 }
 
 /* Responsive adjustments */
@@ -89,16 +90,16 @@
 .card {
     border: none;
     border-radius: 15px; /* Mais arredondado */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease; /* Transição para o hover */
     background-color: var(--light-blue); /* Cor de fundo azul clara */
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: var(--dark-blue); /* Cor de fundo azul mais escura no hover */
-    color: white; /* Texto branco no hover */
+    color: var(--text-color); /* Texto branco no hover */
 }
 
 .card-title {
@@ -106,7 +107,7 @@
 }
 
 .card:hover .card-title {
-    color: white; /* Título branco no hover */
+    color: var(--text-color); /* Título branco no hover */
 }
 
 .card-text {
@@ -114,29 +115,30 @@
 }
 
 .card:hover .card-text {
-    color: white; /* Texto branco no hover */
+    color: var(--text-color); /* Texto branco no hover */
 }
 
 /* Time Slot Buttons */
 .time-slot-button {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
     border-radius: 20px;
     padding: 8px 15px;
     margin: 5px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    color: var(--text-color);
 }
 
 .time-slot-button:hover {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
 }
 
 .time-slot-button.selected {
-    background-color: #28a745;
-    color: white;
-    border-color: #28a745;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border-color: var(--primary-color);
 }
 
 /* Animações de Sentimentos */

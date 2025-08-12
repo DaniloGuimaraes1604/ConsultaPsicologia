@@ -1,12 +1,12 @@
 /* Paleta de Cores e Estilos Globais */
 :root {
-    --primary-color: #005f73;
-    --secondary-color: #0a9396;
-    --background-color: #f4f4f9;
-    --text-color: #333;
-    --light-text-color: #f8f9fa;
+    --primary-color: #4CAF50; /* A professional, calming green */
+    --secondary-color: #81C784; /* Lighter green for accents */
+    --background-color: #F0FFF0; /* Very light green/honeydew */
+    --text-color: #333333; /* Dark gray for text */
+    --light-text-color: #FFFFFF; /* White */
     --border-radius: 0.375rem;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle, classic shadow */
 }
 
 html {
@@ -25,26 +25,26 @@ body {
 /* Cabeçalho e Navegação */
 .navbar-dark .navbar-brand {
     font-weight: bold;
-    color: var(--light-text-color);
+    color: var(--primary-color);
 }
 
 .navbar-dark .nav-link {
-    color: var(--light-text-color);
+    color: var(--text-color);
     transition: color 0.3s ease;
 }
 
 .navbar-dark .nav-link:hover, .navbar-dark .nav-link:focus {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .navbar-dark .btn-outline-light {
-    border-color: var(--secondary-color);
-    color: var(--secondary-color);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
     transition: all 0.3s ease;
 }
 
 .navbar-dark .btn-outline-light:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: var(--light-text-color);
 }
 
@@ -64,8 +64,9 @@ main {
 
 /* Rodapé */
 .footer {
-    background-color: #343a40; /* bg-dark */
+    background-color: #E0FFE0; /* Slightly darker light green */
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    color: var(--text-color);
 }
 
 /* Formulários e Botões */
@@ -76,12 +77,15 @@ main {
 }
 
 .form-control {
-    width: 100%; /* Garante que o input ocupe a largura total do form-group */
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    color: var(--text-color);
 }
 
 .form-control:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 0.25rem rgba(10, 147, 150, 0.25);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
 }
 
 .btn-primary {
@@ -91,8 +95,8 @@ main {
 }
 
 .btn-primary:hover {
-    background-color: #004c5a; /* Um tom mais escuro de azul */
-    border-color: #004c5a;
+    background-color: #43A047;
+    border-color: #43A047;
 }
 
 /* Cards e Sombras */
@@ -101,11 +105,12 @@ main {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #FFFFFF;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-header {
@@ -138,27 +143,18 @@ input[type="range"] {
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
 }
 
-input[type="range"]:hover {
-    cursor: grab;
-}
-
-input[type="range"]:active {
-    cursor: grabbing;
-}
-
-/* Estilo do "polegar" (thumb) do slider para Webkit (Chrome, Safari) */
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Remove o estilo padrão */
+    -webkit-appearance: none;
     appearance: none;
-    width: 14px; /* Largura do polegar */
-    height: 14px; /* Altura do polegar */
-    background: var(--light-text-color); /* Cor do polegar */
-    border: 2px solid var(--secondary-color); /* Borda para destaque */
-    border-radius: 50%; /* Formato circular */
-    cursor: pointer; /* Cursor de mão */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
-    margin-top: -4px; /* Ajusta a posição vertical do polegar (metade da altura da trilha - metade da altura do thumb) */
-    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+    width: 14px;
+    height: 14px;
+    background: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    margin-top: -4px;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
@@ -166,16 +162,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
     border-color: var(--primary-color);
 }
 
-/* Estilo do "polegar" (thumb) do slider para Firefox */
 input[type="range"]::-moz-range-thumb {
     width: 14px;
     height: 14px;
-    background: var(--light-text-color);
+    background: var(--primary-color);
     border: 2px solid var(--secondary-color);
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input[type="range"]::-moz-range-thumb:hover {
@@ -221,3 +216,51 @@ input[type="range"]::-moz-range-track {
     transform: none !important; /* Ensure no transform */
 }
 
+/* Filter Dropdown Styles (Popover-like) */
+.filter-dropdown {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position relative to the parent <th> */
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px;
+    z-index: 1000; /* Ensure it's above other content */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    top: 100%; /* Position below the th */
+    left: 0;
+}
+
+.filter-dropdown .form-select,
+.filter-dropdown .form-control {
+    margin-bottom: 8px;
+}
+
+.filter-dropdown .btn {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.filter-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    color: var(--primary-color); /* Use primary color for the icon */
+}
+
+.thead-dark th {
+    position: relative;
+}
+
+/* Custom styles for Admin patient table spacing */
+.table td, .table th {
+    padding: 0.5rem; /* Reduce padding from default 0.75rem */
+}
+
+/* Ensure striped rows appear for all rows in the patient table */
+.table tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05); /* Light grey for odd rows */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #fff; /* White for even rows */
+}

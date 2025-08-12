@@ -11,5 +11,15 @@ namespace ConsultasPsicologiaMVC.DAO.Interfaces
         Task<bool> AtualizarPaciente(Cadastrar paciente);
         Task<bool> ExcluirPaciente(int id);
         Task<Cadastrar> BuscarPacientePorEmail(string email);
+        (List<PacienteViewModel> pacientes, int totalCount) GetFilteredAndPagedPacientes(
+            int page,
+            int pageSize,
+            string nomeCompleto,
+            string nomeCompletoType,
+            string dataNascimento,
+            string dataNascimentoType,
+            string email,
+            string emailType
+        );
     }
 }

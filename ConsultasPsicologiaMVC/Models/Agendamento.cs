@@ -1,3 +1,4 @@
+using ConsultasPsicologiaMVC.ENUMS;
 using System.ComponentModel.DataAnnotations;
 
 namespace ConsultasPsicologiaMVC.Models
@@ -6,15 +7,11 @@ namespace ConsultasPsicologiaMVC.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [Required]
         public DateTime DataHora { get; set; }
+        public ENUMTIPOCONSULTA TipoConsulta{ get; set; }
+                public string PacienteId { get; set; }
+        public double ValorConsulta { get; set; }
+        public int StatusConsulta { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public string? TipoConsulta { get; set; }
-
-        // Futuramente, podemos adicionar mais detalhes, como:
-        // public int PacienteId { get; set; }
-        // public string Status { get; set; } = "Confirmado";
     }
 }

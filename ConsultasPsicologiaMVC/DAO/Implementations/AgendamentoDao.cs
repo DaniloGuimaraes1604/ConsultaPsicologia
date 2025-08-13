@@ -1,25 +1,23 @@
-using ConsultasPsicologiaMVC.DataBase;
 using ConsultasPsicologiaMVC.DAO.Interfaces;
 using ConsultasPsicologiaMVC.Models;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace ConsultasPsicologiaMVC.DAO.Implementations
 {
     public class AgendamentoDao : IAgendamentoDao
     {
-        private readonly AppDbContext _context;
+        private readonly IDbConnection _connection;
 
-        public AgendamentoDao(AppDbContext context)
+        public AgendamentoDao(IDbConnection connection)
         {
-            _context = context;
+            _connection = connection;
         }
 
-        public async Task<bool> SalvarAgendamento(Agendamento agendamento)
+        public int SalvarAgendamento(Agendamento dadosAgendamento)
         {
-            _context.Agendamentos.Add(agendamento);
-            await _context.SaveChangesAsync();
-            return true; // Or handle specific success/failure based on SaveChangesAsync result
+            // O usuário implementará o corpo do método aqui.
+            // Por enquanto, um retorno de placeholder.
+            return 0;
         }
     }
 }

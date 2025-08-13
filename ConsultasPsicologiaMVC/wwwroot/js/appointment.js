@@ -85,8 +85,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     const finalDate = new Date(selectedDate);
                     finalDate.setHours(hour, 0, 0, 0);
                     
-                    // Use a hidden input to store the ISO string for the backend
-                    document.getElementById('hiddenAppointmentDate').value = finalDate.toISOString();
+                    // Use hidden inputs to store the ISO string for date and time separately
+                    document.getElementById('hiddenAppointmentDate').value = finalDate.toLocaleDateString('pt-BR'); // dd/MM/yyyy
+                    document.getElementById('hiddenAppointmentTime').value = finalDate.toTimeString().split(' ')[0].substring(0, 5); // HH:MM
                     
                     dateInput.value = finalDate.toLocaleString('pt-BR', {
                         year: 'numeric', month: '2-digit', day: '2-digit',
@@ -122,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     icon: 'info',
                     confirmButtonText: 'OK'
                 }).then(() => {
-                    document.getElementById('loginModal').style.display = 'block';
+                    document.getElementById('loginModal').style.display = 'block'; // Show login modal
                 });
             } else {
                 window.setAppointmentModalEnabled(true);
@@ -147,20 +148,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     appointmentForm.onsubmit = async function(event) {
         event.preventDefault();
-        const hiddenDate = document.getElementById('hiddenAppointmentDate').value;
+        const hiddenDateValue = document.getElementById('hiddenAppointmentDate').value; // Get date from hidden input
+        const hiddenTimeValue = document.getElementById('hiddenAppointmentTime').value; // Get time from hidden input
         const selectedAppointmentType = document.querySelector('input[name="appointmentType"]:checked');
+        const pacienteId = document.getElementById('pacienteId')?.value; // Get pacienteId from hidden input
 
-        if (!hiddenDate || !selectedAppointmentType) {
+        if (!hiddenDateValue || !hiddenTimeValue || !selectedAppointmentType || !pacienteId) {
             Swal.fire({
                 title: 'Erro!',
-                text: 'Por favor, selecione uma data, hora e o tipo de consulta.',
+                text: 'Por favor, selecione uma data, hora, o tipo de consulta e certifique-se de estar logado.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
             return;
         }
 
-        const data = { dataHora: hiddenDate, tipoConsulta: selectedAppointmentType.value };
+        const data = {
+            data: hiddenDateValue, // Send date separately
+            hora: hiddenTimeValue, // Send time separately
+            tipoConsulta: selectedAppointmentType.value,
+            pacienteId: pacienteId,
+            valorConsulta: parseFloat(appointmentValueInput.value.replace('R$', '').replace(',', '.').trim()),
+            statusConsulta: 1 // Assuming 1 means 'Agendado'
+        };
 
         try {
             const response = await fetch('/Agendamento/Salvar', {
@@ -196,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     icon: 'warning',
                     confirmButtonText: 'OK'
                 }).then(() => {
-                    window.location.href = '/Login'; // Redireciona para a página de login
+                    document.getElementById('loginModal').style.display = 'block'; // Show login modal
                 });
             } else {
                 Swal.fire({
@@ -217,3 +227,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 });
+
+// Adiciona a localização em português para o flatpickr
+if (typeof flatpickr !== 'undefined') {
+    flatpickr.localize(flatpickr.l10ns.pt);
+}

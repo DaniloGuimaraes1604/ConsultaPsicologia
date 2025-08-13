@@ -1,38 +1,48 @@
-using ConsultasPsicologiaMVC.DataBase;
+using ConsultasPsicologiaMVC.DAO.Interfaces;
 using ConsultasPsicologiaMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using ConsultasPsicologiaMVC.ENUMS;
 
 namespace ConsultasPsicologiaMVC.Controllers
 {
     [Authorize]
     public class AgendamentoController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAgendamentoDao _agendamentoDao;
 
-        public AgendamentoController(AppDbContext context)
+        public AgendamentoController(IAgendamentoDao agendamentoDao)
         {
-            _context = context;
+            _agendamentoDao = agendamentoDao;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Salvar([FromBody] AgendamentoDto agendamentoDto)
+        public IActionResult Salvar([FromBody] AgendamentoDto agendamentoDto)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var agendamento = new Agendamento
+                    if (DateTime.TryParseExact(agendamentoDto.Data + " " + agendamentoDto.Hora, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var dataHora))
                     {
-                        DataHora = agendamentoDto.DataHora
-                    };
+                        var agendamento = new Agendamento
+                        {
+                            DataHora = dataHora,
+                            TipoConsulta = agendamentoDto.TipoConsulta,
+                            PacienteId = agendamentoDto.PacienteId,
+                            ValorConsulta = agendamentoDto.ValorConsulta,
+                            StatusConsulta = agendamentoDto.StatusConsulta
+                        };
 
-                    // Futuramente, podemos adicionar validações, como verificar se o horário já está ocupado.
-                    _context.Agendamentos.Add(agendamento);
-                    await _context.SaveChangesAsync();
-                    return Json(new { success = true, message = "Consulta agendada com sucesso!" });
+                        _agendamentoDao.SalvarAgendamento(agendamento);
+                        return Json(new { success = true, message = "Consulta agendada com sucesso!" });
+                    }
+                    else
+                    {
+                        return Json(new { success = false, message = "Formato de data ou hora inválido." });
+                    }
                 }
                 catch (Exception ex)
                 {

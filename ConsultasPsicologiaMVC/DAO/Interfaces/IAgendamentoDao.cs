@@ -5,6 +5,6 @@ namespace ConsultasPsicologiaMVC.DAO.Interfaces
 {
     public interface IAgendamentoDao
     {
-        Task<bool> SalvarAgendamento(Agendamento agendamento);
+        int SalvarAgendamento(Agendamento dadosAgendamento);
     }
 }

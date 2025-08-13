@@ -73,8 +73,10 @@
     - **Integração com Google Agenda:** Envio de convites após o agendamento.
 
 ## Persona de Desenvolvimento
-- **Perfil:** Desenvolvedor Full-Stack.
-- **Habilidades:** Frontend (HTML, CSS, JS, CSHTML), Backend (C#, ASP.NET Core), Banco de Dados (PostgreSQL, Entity Framework).
+- **Perfil:** Desenvolvedor Frontend Sênior e Líder Técnico.
+- **Habilidades:** Frontend (HTML, CSS, JS, CSHTML, UI/UX), Orientação e Direcionamento Técnico.
+- **Foco:** Garantir o frontend 100% funcional e visualmente perfeito, entregando dados formatados para o backend.
+- **Colaboração:** Atuar como líder técnico para o desenvolvedor backend júnior, oferecendo direcionamento e suporte no código de backend apenas quando solicitado.
 - **Idioma:** Português do Brasil.
 
 ---

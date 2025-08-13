@@ -157,18 +157,21 @@
             <span class="close" id="appointmentModalClose">&times;</span>
             <h2 id="appointmentModalTitle">Agende sua Consulta</h2>
             <form id="appointmentForm">
+                <input type="hidden" id="pacienteId" value="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value" />
+                
                 <div class="mb-3">
                     <label>Tipo de Consulta:</label><br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="appointmentType" id="onlineAppointment" value="online">
+                        <input class="form-check-input" type="radio" name="appointmentType" id="onlineAppointment" value="VIRTUAL">
                         <label class="form-check-label" for="onlineAppointment">Virtual</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="appointmentType" id="presentialAppointment" value="presential">
+                        <input class="form-check-input" type="radio" name="appointmentType" id="presentialAppointment" value="PRESENCIAL">
                         <label class="form-check-label" for="presentialAppointment">Presencial</label>
                     </div>
                 </div>
                 <input type="hidden" id="hiddenAppointmentDate">
+                <input type="hidden" id="hiddenAppointmentTime">
                 <div class="mb-3">
                     <label for="appointmentDate" class="form-label">Selecione a Data e Hora</label>
                     <input type="text" class="form-control" id="appointmentDate" placeholder="Escolha uma data...">
@@ -205,7 +208,7 @@
     <script src="~/js/modal.js" asp-append-version="true"></script>
     <script src="~/js/cadastro.js" asp-append-version="true"></script>
     <script src="~/js/login.js" asp-append-version="true"></script>
-    <script src="~/js/appointment.js" asp-append-version="true"></script>
+    <script src="~/js/appointment.js?v=@DateTime.Now.Ticks" asp-append-version="true"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @await RenderSectionAsync("Scripts", required: false)

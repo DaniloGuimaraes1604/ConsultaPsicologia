@@ -2,13 +2,20 @@ using ConsultasPsicologiaMVC.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAdminDao, ConsultasPsicologiaMVC.DAO.Implementations.AdminDao>(); // Added
+builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAgendamentoDao, ConsultasPsicologiaMVC.DAO.Implementations.AgendamentoDao>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

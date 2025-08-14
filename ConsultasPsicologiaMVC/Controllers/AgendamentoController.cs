@@ -36,7 +36,12 @@ namespace ConsultasPsicologiaMVC.Controllers
                             StatusConsulta = agendamentoDto.StatusConsulta
                         };
 
-                        _agendamentoDao.SalvarAgendamento(agendamento);
+                        var idPaciente = _agendamentoDao.ConsultaIdPaciente(agendamento.PacienteId);
+                        if (idPaciente <= 0)
+                        {
+                            throw new Exception("ID do paciente nao encontrado, por favor tente novamente");
+                        }
+                        _agendamentoDao.SalvarAgendamento(agendamento, idPaciente);
                         return Json(new { success = true, message = "Consulta agendada com sucesso!" });
                     }
                     else
@@ -46,7 +51,6 @@ namespace ConsultasPsicologiaMVC.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // Log do erro (importante para depuração)
                     return Json(new { success = false, message = "Ocorreu um erro ao salvar a consulta: " + ex.Message });
                 }
             }

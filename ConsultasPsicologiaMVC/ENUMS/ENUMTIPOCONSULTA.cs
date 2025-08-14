@@ -2,6 +2,7 @@
 
 namespace ConsultasPsicologiaMVC.ENUMS
 {
+    [DataContract]
     public enum ENUMTIPOCONSULTA
     {
         [EnumMember]

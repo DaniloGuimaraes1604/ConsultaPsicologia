@@ -9,7 +9,7 @@ namespace ConsultasPsicologiaMVC.Models
         public int Id { get; set; }
         public DateTime DataHora { get; set; }
         public ENUMTIPOCONSULTA TipoConsulta{ get; set; }
-                public string PacienteId { get; set; }
+        public string PacienteId { get; set; }
         public double ValorConsulta { get; set; }
         public int StatusConsulta { get; set; }
 

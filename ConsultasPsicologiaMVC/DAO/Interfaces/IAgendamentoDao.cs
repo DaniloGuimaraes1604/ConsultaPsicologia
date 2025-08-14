@@ -5,6 +5,8 @@ namespace ConsultasPsicologiaMVC.DAO.Interfaces
 {
     public interface IAgendamentoDao
     {
-        int SalvarAgendamento(Agendamento dadosAgendamento);
+        int SalvarAgendamento(Agendamento dadosAgendamento, int idPaciente);
+
+        int ConsultaIdPaciente(string email);
     }
 }

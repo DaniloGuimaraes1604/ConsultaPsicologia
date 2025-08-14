@@ -16,6 +16,8 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAdminDao, ConsultasPsicologiaMVC.DAO.Implementations.AdminDao>(); // Added
 builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAgendamentoDao, ConsultasPsicologiaMVC.DAO.Implementations.AgendamentoDao>();
+builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.ICadastroDao, ConsultasPsicologiaMVC.DAO.Implementations.CadastroDao>();
+builder.Services.AddScoped<ConsultasPsicologiaMVC.BLL.Interfaces.ICadastroBll, ConsultasPsicologiaMVC.BLL.CadastroBll>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

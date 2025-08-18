@@ -121,7 +121,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Atenção!',
                     text: 'Você precisa estar logado para agendar uma consulta. Por favor, faça login.',
                     icon: 'info',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-popup',
+                        title: 'swal2-title',
+                        htmlContainer: 'swal2-html-container',
+                        confirmButton: 'swal2-confirm'
+                    }
                 }).then(() => {
                     document.getElementById('loginModal').style.display = 'block'; // Show login modal
                 });
@@ -158,7 +164,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: 'Erro!',
                 text: 'Por favor, selecione uma data, hora, o tipo de consulta e certifique-se de estar logado.',
                 icon: 'error',
-                confirmButtonText: 'OK'
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    htmlContainer: 'swal2-html-container',
+                    confirmButton: 'swal2-confirm'
+                }
             });
             return;
         }
@@ -188,7 +200,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: 'Sucesso!',
                         text: result.message,
                         icon: 'success',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-popup',
+                            title: 'swal2-title',
+                            htmlContainer: 'swal2-html-container',
+                            confirmButton: 'swal2-confirm'
+                        }
                     });
                     closeModal();
                 } else {
@@ -196,7 +214,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: 'Erro!',
                         text: result.message,
                         icon: 'error',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-popup',
+                            title: 'swal2-title',
+                            htmlContainer: 'swal2-html-container',
+                            confirmButton: 'swal2-confirm'
+                        }
                     });
                 }
             } else if (response.status === 401) { // Unauthorized
@@ -204,7 +228,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Não Autenticado!',
                     text: 'Você precisa estar logado para agendar uma consulta.',
                     icon: 'warning',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-popup',
+                        title: 'swal2-title',
+                        htmlContainer: 'swal2-html-container',
+                        confirmButton: 'swal2-confirm'
+                    }
                 }).then(() => {
                     document.getElementById('loginModal').style.display = 'block'; // Show login modal
                 });
@@ -213,7 +243,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Erro!',
                     text: 'Ocorreu um erro ao salvar a consulta. Por favor, tente novamente.',
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-popup',
+                        title: 'swal2-title',
+                        htmlContainer: 'swal2-html-container',
+                        confirmButton: 'swal2-confirm'
+                    }
                 });
             }
         } catch (error) {
@@ -222,7 +258,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: 'Erro de Comunicação!',
                 text: 'Não foi possível conectar ao servidor. Por favor, tente novamente.',
                 icon: 'error',
-                confirmButtonText: 'OK'
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    htmlContainer: 'swal2-html-container',
+                    confirmButton: 'swal2-confirm'
+                },
+                showClass: {
+                    popup: 'swal2-show',
+                    backdrop: 'swal2-backdrop-show',
+                    icon: 'swal2-icon-show'
+                },
+                hideClass: {
+                    popup: 'swal2-hide',
+                    backdrop: 'swal2-backdrop-hide',
+                    icon: 'swal2-icon-hide'
+                }
             });
         }
     };

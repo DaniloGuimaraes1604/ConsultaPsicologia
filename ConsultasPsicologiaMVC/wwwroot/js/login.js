@@ -46,7 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 icon: 'error',
                 confirmButtonText: 'OK',
                 customClass: {
-                    confirmButton: 'btn-swal-error'
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    htmlContainer: 'swal2-html-container',
+                    confirmButton: 'swal2-confirm'
                 }
             });
             return;
@@ -68,7 +71,23 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Sucesso!',
                     text: result.message,
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    timer: 1500,
+                    showConfirmButton: false,
+                    customClass: {
+                        popup: 'swal2-popup',
+                        title: 'swal2-title',
+                        htmlContainer: 'swal2-html-container',
+                    },
+                    showClass: {
+                        popup: 'swal2-show',
+                        backdrop: 'swal2-backdrop-show',
+                        icon: 'swal2-icon-show'
+                    },
+                    hideClass: {
+                        popup: 'swal2-hide',
+                        backdrop: 'swal2-backdrop-hide',
+                        icon: 'swal2-icon-hide'
+                    }
                 }).then(() => {
                     const appointmentModal = document.getElementById('appointmentModal');
                     if (appointmentModal && appointmentModal.style.display === 'block') {
@@ -83,7 +102,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     icon: 'error',
                     confirmButtonText: 'Tentar Novamente',
                     customClass: {
-                        confirmButton: 'btn-swal-error'
+                        popup: 'swal2-popup',
+                        title: 'swal2-title',
+                        htmlContainer: 'swal2-html-container',
+                        confirmButton: 'swal2-confirm'
                     }
                 });
             }
@@ -95,7 +117,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 icon: 'error',
                 confirmButtonText: 'OK',
                 customClass: {
-                    confirmButton: 'btn-swal-error'
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    htmlContainer: 'swal2-html-container',
+                    confirmButton: 'swal2-confirm'
                 }
             });
         }
@@ -121,7 +146,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: 'Erro!',
                         text: 'Não foi possível fazer logout.',
                         icon: 'error',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-popup',
+                            title: 'swal2-title',
+                            htmlContainer: 'swal2-html-container',
+                            confirmButton: 'swal2-confirm'
+                        }
                     });
                 }
             } catch (error) {
@@ -130,7 +161,23 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Erro de Comunicação!',
                     text: 'Não foi possível conectar ao servidor para fazer logout.',
                     icon: 'error',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'swal2-popup',
+                        title: 'swal2-title',
+                        htmlContainer: 'swal2-html-container',
+                        confirmButton: 'swal2-confirm'
+                    },
+                    showClass: {
+                        popup: 'swal2-show',
+                        backdrop: 'swal2-backdrop-show',
+                        icon: 'swal2-icon-show'
+                    },
+                    hideClass: {
+                        popup: 'swal2-hide',
+                        backdrop: 'swal2-backdrop-hide',
+                        icon: 'swal2-icon-hide'
+                    }
                 });
             }
         });

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace ConsultasPsicologiaMVC.BLL
 {
-    public class CadastroBLL : ICadastroBLL
+    public class CadastroBLL : ICadastroBll
     {
         private readonly ICadastroDao _cadastroDao;
 

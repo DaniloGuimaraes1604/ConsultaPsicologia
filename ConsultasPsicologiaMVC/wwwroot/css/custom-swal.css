@@ -1,57 +1,87 @@
+/*
+==============================================
+   NOVO LAYOUT: ELEGÂNCIA FUNCIONAL (SWEETALERT2)
+==============================================
+*/
+
 .swal2-popup {
-    border-radius: 25px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
-    border: none !important;
+    border-radius: var(--border-radius) !important;
+    background-color: var(--background-white) !important;
+    box-shadow: var(--shadow-medium) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+    font-family: var(--font-body) !important;
 }
 
 .swal2-title {
-    color: #4a4a4a !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-weight: 600 !important;
+    color: var(--text-color) !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
 }
 
 .swal2-html-container {
-    color: #555 !important;
-    font-family: 'Poppins', sans-serif !important;
+    color: var(--text-color) !important;
+    font-family: var(--font-body) !important;
 }
 
 .swal2-confirm, .swal2-cancel {
-    border-radius: 12px !important;
-    padding: 12px 30px !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-weight: 500 !important;
+    border-radius: var(--border-radius) !important;
+    padding: 10px 20px !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
     transition: all 0.3s ease !important;
+    border: none !important;
 }
 
 .swal2-confirm {
-    background-color: #0056b3 !important;
-    color: white !important;
+    background-color: var(--primary-color) !important;
+    color: var(--light-text-color) !important;
 }
 
 .swal2-confirm:hover {
+    background-color: var(--secondary-color) !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 4px 15px rgba(0, 86, 179, 0.2) !important;
+    box-shadow: var(--shadow-light) !important;
 }
 
 .swal2-cancel {
-    background-color: #f1f1f1 !important;
-    color: #555 !important;
+    background-color: var(--background-light) !important; /* Fundo claro para o botão de cancelar */
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
 }
 
 .swal2-cancel:hover {
+    background-color: #e9ecef !important; /* Um pouco mais escuro no hover */
     transform: translateY(-2px) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: var(--shadow-light) !important;
+}
+
+/* Ícones de status */
+.swal2-icon.swal2-success {
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
 }
 
 .swal2-icon.swal2-success .swal2-success-ring {
-    border-color: #a5dc86 !important;
+    border-color: var(--primary-color) !important;
 }
 
 .swal2-icon.swal2-error {
-    border-color: #f27474 !important;
+    border-color: #dc3545 !important; /* Vermelho padrão do Bootstrap para erro */
+    color: #dc3545 !important;
 }
 
 .swal2-icon.swal2-info {
-    border-color: #c9dae1 !important;
-    color: #5490de !important;
+    border-color: #0dcaf0 !important; /* Azul padrão do Bootstrap para info */
+    color: #0dcaf0 !important;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #ffc107 !important; /* Amarelo padrão do Bootstrap para warning */
+    color: #ffc107 !important;
+}
+
+.swal2-icon.swal2-question {
+    border-color: #6c757d !important; /* Cinza padrão do Bootstrap para question */
+    color: #6c757d !important;
 }

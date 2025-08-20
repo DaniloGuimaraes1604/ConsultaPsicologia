@@ -1,183 +1,184 @@
-/* Paleta de Cores Adicionais */
-:root {
-    --light-blue: #FFFFFF; /* White for sections */
-    --dark-blue: #E0FFE0; /* Very light green for hover */
+/*
+==============================================
+   NOVO LAYOUT: ELEGÂNCIA FUNCIONAL (HOME)
+==============================================
+*/
+
+/* 1. HEADER SECTION
+---------------------------------------------- */
+.header-section {
+    padding: 80px 0;
+    background-color: #f8f9fa; /* Fundo suave para a seção de cabeçalho */
+    border-bottom: 1px solid #e9ecef;
 }
 
-/* Presentation Section */
-.presentation-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px 20px;
-    background-color: var(--light-blue);
-    border-radius: 20px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    box-shadow: var(--box-shadow);
-}
-
-.profile-pic {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
+.header-section .profile-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%; /* Imagem circular */
     object-fit: cover;
-    margin-right: 40px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    border: 4px solid var(--primary-color);
+    border: 5px solid var(--primary-color); /* Borda com a cor primária */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
+    transition: transform 0.3s ease;
 }
 
-.presentation-text {
-    max-width: 600px;
+.header-section .profile-image:hover {
+    transform: scale(1.03); /* Leve zoom no hover */
 }
 
-.presentation-text h1 {
-    font-weight: 600;
+.header-section h1 {
+    font-family: 'Poppins', sans-serif; /* Usando Poppins para títulos */
+    font-weight: 700;
+    color: var(--text-color);
     margin-bottom: 15px;
 }
 
-.presentation-text .lead {
-    font-size: 1.1rem;
+.header-section .lead {
+    font-family: 'Roboto', sans-serif; /* Usando Roboto para corpo de texto */
+    font-size: 1.2rem;
+    color: #555;
     margin-bottom: 20px;
 }
 
-.specialties {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 25px;
+.header-section .description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
 }
 
-.specialties li {
-    background-color: var(--secondary-color); /* Usando a cor secundária para as tags */
-    color: var(--light-text-color);
-    border-radius: 15px; /* Mais arredondado */
-    padding: 8px 15px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    display: inline-block;
-    font-size: 0.9rem;
+/* 2. SPECIALTIES SECTION
+---------------------------------------------- */
+.specialties-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.specialties-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+}
+
+.specialty-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: var(--border-radius);
+    padding: 30px;
     transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.btn-schedule {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    padding: 15px 30px; /* Botão maior */
-    border-radius: 30px; /* Mais arredondado */
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-    border: none;
-}
-
-.btn-schedule:hover {
-    background-color: #43A047;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .presentation-section {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .profile-pic {
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-}
-
-/* Cards na Página Inicial */
-.card {
-    border: none;
-    border-radius: 15px; /* Mais arredondado */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease; /* Transição para o hover */
-    background-color: var(--light-blue); /* Cor de fundo azul clara */
-}
-
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: var(--dark-blue); /* Cor de fundo azul mais escura no hover */
-    color: var(--text-color); /* Texto branco no hover */
-}
-
-.card-title {
-    color: var(--primary-color); /* Cor do título */
-}
-
-.card:hover .card-title {
-    color: var(--text-color); /* Título branco no hover */
-}
-
-.card-text {
-    color: var(--text-color); /* Cor do texto */
-}
-
-.card:hover .card-text {
-    color: var(--text-color); /* Texto branco no hover */
-}
-
-/* Time Slot Buttons */
-.time-slot-button {
-    background-color: #FFFFFF;
-    border: 1px solid #CCCCCC;
-    border-radius: 20px;
-    padding: 8px 15px;
-    margin: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    color: var(--text-color);
-}
-
-.time-slot-button:hover {
-    background-color: var(--secondary-color);
-    color: var(--light-text-color);
-}
-
-.time-slot-button.selected {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
+.specialty-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     border-color: var(--primary-color);
 }
 
-/* Animações de Sentimentos */
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.02); opacity: 0.9; }
-    100% { transform: scale(1); opacity: 1; }
+.specialty-item .icon-circle {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border-radius: 50%;
+    font-size: 2.5rem;
+    margin: 0 auto 20px auto;
+    transition: all 0.3s ease;
 }
 
-@keyframes fade-in-out {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
+.specialty-item:hover .icon-circle {
+    background-color: var(--secondary-color);
+    transform: rotateY(180deg); /* Efeito de virar no hover */
 }
 
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-1px); }
-    20%, 40%, 60%, 80% { transform: translateX(1px); }
+.specialty-item h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 10px;
 }
 
-@keyframes sway {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(0.5deg); }
-    75% { transform: rotate(-0.5deg); }
+.specialty-item p {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+    font-size: 0.95rem;
 }
 
-.specialties li.ansiedade:hover {
-    animation: pulse 1s infinite ease-in-out;
+/* 3. BENEFITS SECTION (Novo Conteúdo)
+---------------------------------------------- */
+.benefits-section {
+    padding: 80px 0;
+    background-color: var(--background-light); /* Usa o fundo claro global */
 }
 
-.specialties li.depressao:hover {
-    animation: fade-in-out 2.5s infinite ease-in-out;
+.benefits-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 40px;
 }
 
-.specialties li.estresse:hover {
-    animation: shake 0.3s infinite;
+.benefits-list {
+    list-style: none;
+    padding: 0;
 }
 
-.specialties li.relacionamentos:hover {
-    animation: sway 1.8s infinite ease-in-out;
+.benefits-list li {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.benefits-list li i {
+    margin-right: 10px;
+    color: var(--primary-color); /* Ícone com a cor primária */
+}
+
+
+/* 4. CONTENT SECTION (Existing Cards)
+---------------------------------------------- */
+.content-section {
+    padding: 80px 0;
+    background-color: #f8f9fa; /* Fundo suave para a seção de conteúdo */
+}
+
+.content-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 40px;
+}
+
+.content-section .card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.content-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.content-section .card-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.content-section .card-text {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .header-section .profile-image {
+        margin-bottom: 30px;
+    }
 }

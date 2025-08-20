@@ -48,3 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// Dynamic Navbar on Scroll
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 50) { // Adjust this value as needed
+        $('.fixed-top').removeClass('navbar-transparent').addClass('navbar-solid');
+    } else {
+        $('.fixed-top').removeClass('navbar-solid').addClass('navbar-transparent');
+    }
+});

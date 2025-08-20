@@ -3,62 +3,169 @@
     ViewData["Title"] = "Página Inicial";
 }
 
-<div class="presentation-section" data-aos="fade-up">
-    <img src="https://s2-g1.glbimg.com/WfXg9j4PrruL9Pw85zLiTUv6STc=/0x0:1000x750/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2019/1/d/ufohYYTeKTSmCZbb5SDw/foto-cerebro-quiz1.jpg" alt="Foto da Psicóloga" class="profile-pic" data-aos="fade-right">
-    <div class="presentation-text" data-aos="fade-left">
-        <h1>Dra. Caroline Guimarães</h1>
-        <p class="lead">Psicóloga Clínica com foco em Terapia Cognitivo-Comportamental (TCC), dedicada a ajudar você a encontrar o equilíbrio e bem-estar emocional.</p>
-        <ul class="specialties">
-            <li class="ansiedade">Ansiedade</li>
-            <li class="depressao">Depressão</li>
-            <li class="estresse">Estresse</li>
-            <li class="relacionamentos">Relacionamentos</li>
-        </ul>
-        <button id="scheduleBtn" class="btn btn-lg btn-schedule">Agende sua Consulta</button>
+<!-- ============================ Header Section (Elegância Funcional) ============================ -->
+<section class="header-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6 text-center text-md-start" data-aos="fade-right">
+                <img src="https://s2-g1.glbimg.com/WfXg9j4PrruL9Pw85zLiTUv6STc=/0x0:1000x750/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2019/1/d/ufohYYTeKTSmCZbb5SDw/foto-cerebro-quiz1.jpg" alt="Foto da Psicóloga Dra. Caroline Guimarães" class="profile-image shadow-lg">
+            </div>
+            <div class="col-lg-7 col-md-6 mt-4 mt-md-0" data-aos="fade-left">
+                <h1 class="display-4">Dra. Caroline Guimarães</h1>
+                <p class="lead">
+                    Psicóloga Clínica com foco em Terapia Cognitivo-Comportamental (TCC),
+                    dedicada a ajudar você a encontrar o equilíbrio e bem-estar emocional.
+                </p>
+                <p class="description">
+                    Com anos de experiência, ofereço um ambiente acolhedor e seguro para explorar suas questões,
+                    desenvolver estratégias eficazes e promover uma vida mais plena e significativa.
+                    Minha abordagem é baseada em evidências científicas, buscando sempre a personalização do tratamento
+                    para atender às suas necessidades individuais. Acredito no potencial de cada pessoa para superar desafios
+                    e alcançar uma saúde mental robusta.
+                </p>
+                <button id="scheduleBtn" class="btn btn-primary btn-lg mt-3">
+                    <i class="fas fa-calendar-alt me-2"></i> Agende sua Consulta
+                </button>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 mb-4" data-aos="fade-right">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h3 class="card-title">Inteligência Artificial e Saúde Mental</h3>
-                    <p class="card-text">Explore como a IA está revolucionando o diagnóstico e tratamento em saúde mental, oferecendo novas ferramentas para psicólogos e pacientes.</p>
+<!-- ============================ Specialties Section (Elegância Funcional) ============================ -->
+<section class="specialties-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" data-aos="fade-up">Minhas Especialidades</h2>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="specialty-item text-center h-100">
+                    <div class="icon-circle mb-3"><i class="fas fa-frown-open"></i></div>
+                    <h4>Depressão</h4>
+                    <p>Apoio e estratégias para lidar com a tristeza profunda e falta de energia, promovendo a recuperação e o bem-estar.</p>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 mb-4" data-aos="fade-left">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h3 class="card-title">Realidade Virtual na Terapia</h3>
-                    <p class="card-text">Descubra o potencial da Realidade Virtual como uma ferramenta imersiva para terapias de exposição e manejo de fobias.</p>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="specialty-item text-center h-100">
+                    <div class="icon-circle mb-3"><i class="fas fa-wind"></i></div>
+                    <h4>Ansiedade</h4>
+                    <p>Técnicas eficazes para gerenciar preocupações excessivas, ataques de pânico e o impacto da ansiedade no dia a dia.</p>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12 mb-4" data-aos="zoom-in">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h3 class="card-title">Telemedicina e Acessibilidade</h3>
-                    <p class="card-text">A telemedicina tornou o acesso à terapia mais fácil do que nunca. Saiba como a tecnologia conecta pacientes e profissionais em qualquer lugar.</p>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="specialty-item text-center h-100">
+                    <div class="icon-circle mb-3"><i class="fas fa-bolt"></i></div>
+                    <h4>Estresse</h4>
+                    <p>Desenvolvimento de resiliência e métodos práticos para reduzir a tensão diária e melhorar a qualidade de vida.</p>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 mb-4" data-aos="flip-up">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h3 class="card-title">Aplicativos de Bem-Estar</h3>
-                    <p class="card-text">Uma análise dos melhores aplicativos de bem-estar e meditação que podem complementar sua jornada terapêutica.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 mb-4" data-aos="flip-down">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h3 class="card-title">Segurança de Dados na Saúde Digital</h3>
-                    <p class="card-text">A importância da privacidade e segurança dos dados em plataformas de saúde digital e como protegemos suas informações.</p>
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="400">
+                <div class="specialty-item text-center h-100">
+                    <div class="icon-circle mb-3"><i class="fas fa-heart"></i></div>
+                    <h4>Relacionamentos</h4>
+                    <p>Melhora da comunicação e construção de laços saudáveis em todas as esferas da vida.</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- ============================ Benefits Section (Novo Conteúdo) ============================ -->
+<section class="benefits-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5" data-aos="fade-up">Os Benefícios da Terapia Psicológica</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <p class="text-center mb-4">
+                    A terapia psicológica é um investimento em sua saúde mental e bem-estar geral.
+                    Através de um processo colaborativo e confidencial, você pode desenvolver
+                    ferramentas e insights para lidar com os desafios da vida de forma mais eficaz.
+                </p>
+                <ul class="list-unstyled benefits-list">
+                    <li data-aos="fade-up" data-aos-delay="200"><i class="fas fa-check-circle me-2 text-primary"></i> Autoconhecimento aprofundado e clareza sobre suas emoções.</li>
+                    <li data-aos="fade-up" data-aos-delay="300"><i class="fas fa-check-circle me-2 text-primary"></i> Desenvolvimento de estratégias eficazes para lidar com o estresse e a ansiedade.</li>
+                    <li data-aos="fade-up" data-aos-delay="400"><i class="fas fa-check-circle me-2 text-primary"></i> Melhoria na qualidade dos relacionamentos interpessoais.</li>
+                    <li data-aos="fade-up" data-aos-delay="500"><i class="fas fa-check-circle me-2 text-primary"></i> Superação de traumas e padrões de pensamento negativos.</li>
+                    <li data-aos="fade-up" data-aos-delay="600"><i class="fas fa-check-circle me-2 text-primary"></i> Aumento da autoestima e da confiança.</li>
+                    <li data-aos="fade-up" data-aos-delay="700"><i class="fas fa-check-circle me-2 text-primary"></i> Promoção de uma vida mais equilibrada e com propósito.</li>
+                </ul>
+                <p class="text-center mt-4">
+                    Não espere que os problemas se acumulem. Buscar ajuda profissional é um ato de coragem e autocuidado.
+                    Estou aqui para te guiar nessa jornada.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================ Content Section (Existing Cards + Novos) ============================ -->
+<section class="content-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" data-aos="fade-up">Artigos e Insights</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4" data-aos="fade-right">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Inteligência Artificial e Saúde Mental</h5>
+                        <p class="card-text">Explore como a IA está revolucionando o diagnóstico e tratamento em saúde mental, oferecendo novas ferramentas para psicólogos e pacientes.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4" data-aos="fade-left">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Realidade Virtual na Terapia</h5>
+                        <p class="card-text">Descubra o potencial da Realidade Virtual como uma ferramenta imersiva para terapias de exposição e manejo de fobias.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-4" data-aos="zoom-in">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Telemedicina e Acessibilidade</h5>
+                        <p class="card-text">A telemedicina tornou o acesso à terapia mais fácil do que nunca. Saiba como a tecnologia conecta pacientes e profissionais em qualquer lugar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4" data-aos="flip-up">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Aplicativos de Bem-Estar</h5>
+                        <p class="card-text">Uma análise dos melhores aplicativos de bem-estar e meditação que podem complementar sua jornada terapêutica.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4" data-aos="flip-down">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Segurança de Dados na Saúde Digital</h5>
+                        <p class="card-text">A importância da privacidade e segurança dos dados em plataformas de saúde digital e como protegemos suas informações.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Novos Cards de Psicologia Geral -->
+            <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-delay="100">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">A Importância da Escuta Ativa na Terapia</h5>
+                        <p class="card-text">Entenda como a escuta atenta e empática do terapeuta é fundamental para o processo de cura e autodescoberta do paciente.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4" data-aos="fade-left" data-aos-delay="100">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Como Lidar com o Luto: Um Guia Psicológico</h5>
+                        <p class="card-text">O luto é um processo natural, mas doloroso. Conheça as fases e estratégias psicológicas para atravessar esse período com apoio.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Mindfulness e Redução do Estresse: Práticas para o Dia a Dia</h5>
+                        <p class="card-text">Descubra como a atenção plena pode ser uma ferramenta poderosa para diminuir o estresse, aumentar o foco e promover a serenidade.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

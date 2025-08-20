@@ -6,11 +6,11 @@ using System.Security.Cryptography;
 
 namespace ConsultasPsicologiaMVC.BLL
 {
-    public class CadastroBll : ICadastroBll
+    public class CadastroBLL : ICadastroBLL
     {
         private readonly ICadastroDao _cadastroDao;
 
-        public CadastroBll(ICadastroDao cadastroDao)
+        public CadastroBLL(ICadastroDao cadastroDao)
         {
             _cadastroDao = cadastroDao;
         }

@@ -1,146 +1,177 @@
-/* Paleta de Cores e Estilos Globais */
+/*
+==============================================
+   NOVO LAYOUT: ELEGÂNCIA FUNCIONAL (GLOBAL)
+==============================================
+*/
+
+/* 1. VARIÁVEIS GLOBAIS
+---------------------------------------------- */
 :root {
-    --primary-color: #4CAF50; /* A professional, calming green */
-    --secondary-color: #81C784; /* Lighter green for accents */
-    --background-color: #F0FFF0; /* Very light green/honeydew */
-    --text-color: #333333; /* Dark gray for text */
-    --light-text-color: #FFFFFF; /* White */
-    --border-radius: 0.375rem;
-    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle, classic shadow */
+    --primary-color: #4CAF50; /* Verde profissional */
+    --secondary-color: #66BB6A; /* Verde mais claro para acentos */
+    --text-color: #333333; /* Texto escuro principal */
+    --light-text-color: #FFFFFF; /* Texto claro */
+    --background-light: #f8f9fa; /* Fundo claro para seções */
+    --background-white: #FFFFFF; /* Fundo branco para cards */
+    --border-color: #e9ecef; /* Cor de borda suave */
+    --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra leve */
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.12); /* Sombra média */
+    --border-radius: 8px; /* Raio de borda padrão */
+
+    /* Tipografia */
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Roboto', sans-serif;
 }
 
+/* 2. ESTILOS DE BASE
+---------------------------------------------- */
 html {
     font-size: 16px;
     overflow-x: hidden;
 }
 
 body {
-    background-color: var(--background-color);
+    font-family: var(--font-body);
     color: var(--text-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
+    background-color: var(--background-light); /* Fundo geral do body */
     overflow-x: hidden;
 }
 
-/* Cabeçalho e Navegação */
-.navbar-dark .navbar-brand {
-    font-weight: bold;
-    color: var(--primary-color);
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--text-color);
+    font-weight: 700;
 }
 
-.navbar-dark .nav-link {
-    color: var(--text-color);
+a {
+    color: var(--primary-color);
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.navbar-dark .nav-link:hover, .navbar-dark .nav-link:focus {
-    color: var(--primary-color);
+a:hover {
+    color: var(--secondary-color);
 }
 
-.navbar-dark .btn-outline-light {
+/* 3. CABEÇALHO E NAVEGAÇÃO
+---------------------------------------------- */
+.navbar {
+    padding: 1rem 1.5rem;
+    background-color: var(--background-white); /* Navbar padrão branca */
+    box-shadow: var(--shadow-light);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: var(--primary-color) !important;
+    font-size: 1.5rem;
+}
+
+.navbar .nav-link {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover, .navbar .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+.navbar .btn-outline-light {
     border-color: var(--primary-color);
     color: var(--primary-color);
     transition: all 0.3s ease;
 }
 
-.navbar-dark .btn-outline-light:hover {
+.navbar .btn-outline-light:hover {
     background-color: var(--primary-color);
     color: var(--light-text-color);
 }
 
-/* Conteúdo Principal */
-.container {
-    max-width: 1140px;
-}
-
-main {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-}
-
-.main-content-padding {
-    padding-bottom: 80px; /* Ajuste conforme a altura do rodapé */
-}
-
-/* Rodapé */
-.footer {
-    background-color: #E0FFE0; /* Slightly darker light green */
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-    color: var(--text-color);
-}
-
-/* Formulários e Botões */
-.form-group {
-    max-width: 500px; /* Aumenta a largura máxima do grupo de formulário */
-    margin-left: auto; /* Centraliza o grupo de formulário */
-    margin-right: auto; /* Centraliza o grupo de formulário */
-}
-
-.form-control {
-    width: 100%;
-    background-color: #FFFFFF;
-    border: 1px solid #CCCCCC;
-    color: var(--text-color);
-}
-
-.form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
-}
-
+/* 4. BOTÕES GLOBAIS
+---------------------------------------------- */
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    transition: background-color 0.3s ease;
+    color: var(--light-text-color);
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #43A047;
-    border-color: #43A047;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-light);
 }
 
-/* Cards e Sombras */
+/* 5. CARDS GLOBAIS
+---------------------------------------------- */
 .card {
-    border: none;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #FFFFFF;
+    background-color: var(--background-white);
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
 }
 
-.card-header {
-    background-color: var(--primary-color);
+.card-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.card-text {
+    font-family: var(--font-body);
+    color: var(--text-color);
+}
+
+/* 6. RODAPÉ
+---------------------------------------------- */
+.footer {
+    background-color: var(--text-color); /* Fundo escuro para o rodapé */
     color: var(--light-text-color);
-    font-weight: bold;
-    border-bottom: none;
-    border-top-left-radius: var(--border-radius);
-    border-top-right-radius: var(--border-radius);
+    padding: 2rem 0;
+    margin-top: auto;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
-/* Responsividade */
+.footer a {
+    color: var(--light-text-color);
+}
+
+.footer a:hover {
+    color: var(--secondary-color);
+}
+
+/* 7. RESPONSIVIDADE
+---------------------------------------------- */
 @media (max-width: 768px) {
     .navbar-nav {
         text-align: center;
     }
 }
 
-/* Estilos para o input range (Nota do Paciente) */
+/* Estilos para o input range (Nota do Paciente) - Mantidos do original */
 input[type="range"] {
-    -webkit-appearance: none; /* Remove o estilo padrão do navegador */
-    width: 100%; /* Largura total */
-    height: 6px; /* Altura da trilha */
-    background: linear-gradient(to right, var(--secondary-color) 0%, var(--primary-color) 100%); /* Gradiente para a trilha */
-    outline: none; /* Remove o contorno ao focar */
-    border-radius: 3px; /* Bordas arredondadas para a trilha */
-    transition: background 0.3s ease; /* Transição suave para o background */
-    margin: 10px 0; /* Espaçamento vertical */
-    padding: 0; /* Remove padding padrão */
-    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, var(--secondary-color) 0%, var(--primary-color) 100%);
+    outline: none;
+    border-radius: 3px;
+    transition: background 0.3s ease;
+    margin: 10px 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -178,7 +209,6 @@ input[type="range"]::-moz-range-thumb:hover {
     border-color: var(--primary-color);
 }
 
-/* Estilo da trilha do slider para Firefox */
 input[type="range"]::-moz-range-track {
     background: linear-gradient(to right, var(--secondary-color) 0%, var(--primary-color) 100%);
     border-radius: 3px;
@@ -186,10 +216,9 @@ input[type="range"]::-moz-range-track {
 }
 
 .tab-pane label {
-    color: var(--text-color); /* Garante que as labels sejam visíveis */
+    color: var(--text-color);
 }
 
-/* Remover animações e efeitos de hover na Gestão de Valores e Horários */
 .nav-pills .nav-link {
     transition: none !important;
 }
@@ -197,7 +226,7 @@ input[type="range"]::-moz-range-track {
 .nav-pills .nav-link:hover,
 .nav-pills .nav-link:focus {
     background-color: transparent !important;
-    color: var(--primary-color) !important; /* Cor do texto ao passar o mouse */
+    color: var(--primary-color) !important;
 }
 
 .nav-pills .nav-link.active {
@@ -212,22 +241,21 @@ input[type="range"]::-moz-range-track {
 
 .btn-primary:hover,
 .btn-secondary:hover {
-    opacity: 0.9; /* Leve opacidade para indicar interação, sem animação */
-    transform: none !important; /* Ensure no transform */
+    opacity: 0.9;
+    transform: none !important;
 }
 
-/* Filter Dropdown Styles (Popover-like) */
 .filter-dropdown {
-    display: none; /* Hidden by default */
-    position: absolute; /* Position relative to the parent <th> */
+    display: none;
+    position: absolute;
     background-color: #f9f9f9;
     min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px;
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 1000;
     border-radius: 5px;
     border: 1px solid #ddd;
-    top: 100%; /* Position below the th */
+    top: 100%;
     left: 0;
 }
 
@@ -244,23 +272,21 @@ input[type="range"]::-moz-range-track {
 .filter-icon {
     cursor: pointer;
     margin-left: 5px;
-    color: var(--primary-color); /* Use primary color for the icon */
+    color: var(--primary-color);
 }
 
 .thead-dark th {
     position: relative;
 }
 
-/* Custom styles for Admin patient table spacing */
 .table td, .table th {
-    padding: 0.5rem; /* Reduce padding from default 0.75rem */
+    padding: 0.5rem;
 }
 
-/* Ensure striped rows appear for all rows in the patient table */
 .table tbody tr:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.05); /* Light grey for odd rows */
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .table tbody tr:nth-child(even) {
-    background-color: #fff; /* White for even rows */
+    background-color: #fff;
 }

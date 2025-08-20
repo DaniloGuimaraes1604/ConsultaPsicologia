@@ -1,142 +1,146 @@
-/* Estilo "Clareza Clínica" para todos os modais e botões principais */
+/*
+==============================================
+   NOVO LAYOUT: ELEGÂNCIA FUNCIONAL (MODAIS)
+==============================================
+*/
 
 /* Estilo geral para todos os modais */
-#cadastroModal .modal-content, 
-#loginModal .modal-content, 
+#cadastroModal .modal-content,
+#loginModal .modal-content,
 #appointmentModal .modal-content {
-    font-family: 'Poppins', sans-serif; /* Keeping Poppins as it's clean */
-    background-color: #FFFFFF; /* White background for modals */
-    color: var(--text-color); /* Dark gray text */
-    border-radius: 16px;
-    border: 1px solid #E0E0E0; /* Light gray border */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Subtle shadow */
+    /* font-family: var(--font-body); - Removido, já definido globalmente */
+    background-color: var(--background-white);
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-medium); /* Sombra mais pronunciada para modais */
     padding: 40px;
 }
 
 /* Títulos dos modais */
-#cadastroModal h2, 
-#loginModal h2, 
+#cadastroModal h2,
+#loginModal h2,
 #appointmentModal h2 {
     text-align: center;
-    font-weight: 500;
-    color: var(--primary-color); /* Green title */
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--primary-color);
     margin-bottom: 2.5rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.5px; /* Ajustado para consistência */
 }
 
 /* Labels dos modais */
-#cadastroModal .form-label, 
-#loginModal .form-label, 
+#cadastroModal .form-label,
+#loginModal .form-label,
 #appointmentModal .form-label {
-    color: var(--text-color); /* Dark gray labels */
-    font-size: 0.8rem;
+    color: var(--text-color);
+    font-size: 0.9rem; /* Ajustado para consistência */
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px; /* Ajustado para consistência */
     font-weight: 500;
+    margin-bottom: .5rem; /* Ajustado para consistência */
 }
 
 /* Campos de formulário dos modais */
-#cadastroModal .form-control, 
-#loginModal .form-control, 
+#cadastroModal .form-control,
+#loginModal .form-control,
 #appointmentModal .form-control {
-    background-color: #FFFFFF; /* White input background */
-    border: none;
-    border-bottom: 2px solid #CCCCCC; /* Light gray bottom border */
-    border-radius: 0;
-    color: var(--text-color); /* Dark gray text */
-    padding: 10px 5px;
-    transition: border-color 0.3s ease-in-out;
+    background-color: var(--background-white) !important; /* Garante que o fundo seja branco */
+    border: 1px solid var(--border-color) !important; /* Garante a borda */
+    color: var(--text-color) !important; /* Garante a cor do texto */
+    box-shadow: none !important; /* Remove qualquer sombra padrão do Bootstrap */
+    padding: 0.75rem 1rem; /* Padding consistente */
+    border-radius: var(--border-radius); /* Borda arredondada */
 }
 
-#cadastroModal .form-control:focus, 
-#loginModal .form-control:focus, 
+#cadastroModal .form-control:focus,
+#loginModal .form-control:focus,
 #appointmentModal .form-control:focus {
-    border-color: var(--primary-color); /* Green focus border */
-    box-shadow: none;
-    outline: none;
+    border-color: var(--primary-color) !important; /* Cor da borda no foco */
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25) !important; /* Sombra no foco */
 }
 
 /* Texto de ajuda dos modais */
-#cadastroModal .form-text, 
-#loginModal .form-text, 
+#cadastroModal .form-text,
+#loginModal .form-text,
 #appointmentModal .form-text {
-    color: #A0AEC0; /* Light gray help text */
-    font-size: 0.75rem;
+    color: #6c757d; /* Cinza mais suave para texto de ajuda */
+    font-size: 0.8rem; /* Ajustado para consistência */
+    margin-top: .25rem; /* Ajustado para consistência */
 }
 
 /* Botões primários dos modais e botão de agendamento */
-#cadastroModal .btn-primary, 
-#loginModal .btn-primary, 
+#cadastroModal .btn-primary,
+#loginModal .btn-primary,
 #appointmentModal .btn-primary,
 .btn-schedule {
-    background-color: var(--primary-color); /* Green button */
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background-color 0.3s, transform 0.2s;
-    color: var(--light-text-color); /* White text */
+    background-color: var(--primary-color) !important; /* Garante a cor de fundo */
+    border-color: var(--primary-color) !important; /* Garante a cor da borda */
+    color: var(--light-text-color) !important; /* Garante a cor do texto */
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-#cadastroModal .btn-primary:hover, 
-#loginModal .btn-primary:hover, 
+#cadastroModal .btn-primary:hover,
+#loginModal .btn-primary:hover,
 #appointmentModal .btn-primary:hover,
 .btn-schedule:hover {
-    background-color: #43A047; /* Darker green on hover */
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
     transform: translateY(-2px);
-    color: var(--light-text-color);
+    box-shadow: var(--shadow-light);
 }
 
-/* Botões de fechar dos modais */
-#cadastroModal .close, 
-#loginModal .close, 
+
+/* Botões de fechar dos modais - já estilizados em modal.css */
+/* Removendo regras duplicadas ou conflitantes */
+#cadastroModal .close,
+#loginModal .close,
 #appointmentModal .close {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    color: var(--text-color); /* Dark gray close button */
-    font-size: 1.5rem;
-    opacity: 0.8;
-    transition: color 0.2s;
+    /* Removido: position, top, right, font-size, opacity, transition, background, border, cursor */
+    /* Essas propriedades são agora controladas por .close em modal.css */
+    color: var(--text-color); /* Mantido para garantir a cor base */
 }
 
-#cadastroModal .close:hover, 
-#loginModal .close:hover, 
+#cadastroModal .close:hover,
+#loginModal .close:hover,
 #appointmentModal .close:hover {
-    color: var(--primary-color); /* Green on hover */
+    color: var(--primary-color); /* Mantido para garantir a cor no hover */
+    /* Removido: transform, text-decoration */
 }
+
 
 /* Botões de visualizar senha */
-#cadastroModal .position-relative .btn, 
+#cadastroModal .position-relative .btn,
 #loginModal .position-relative .btn {
     background: transparent;
     border: none;
-    color: var(--text-color); /* Dark gray icon */
+    color: var(--text-color);
     transition: color 0.2s;
 }
 
-#cadastroModal .position-relative .btn:hover, 
+#cadastroModal .position-relative .btn:hover,
 #loginModal .position-relative .btn:hover {
-    color: var(--primary-color); /* Green on hover */
+    color: var(--primary-color);
 }
 
 /* Estilos para os botões do SweetAlert2 */
 .btn-swal-confirm {
     background-color: var(--primary-color) !important;
-    border-radius: 8px !important;
+    border-radius: var(--border-radius) !important;
     padding: 10px 20px !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
 }
 
 .btn-swal-error {
-    background-color: #e53e3e !important; /* Keeping red for errors */
-    border-radius: 8px !important;
+    background-color: #dc3545 !important; /* Vermelho padrão do Bootstrap para erro */
+    border-radius: var(--border-radius) !important;
     padding: 10px 20px !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
 }

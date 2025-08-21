@@ -37,7 +37,7 @@ namespace ConsultasPsicologiaMVC.DAO.Implementations
             }
         }
 
-        public int SalvarAgendamento(Agendamento dadosAgendamento, int idPaciente)
+        public bool SalvarAgendamento(Agendamento dadosAgendamento, int idPaciente)
         {
             try
             {
@@ -63,14 +63,15 @@ namespace ConsultasPsicologiaMVC.DAO.Implementations
                         command.Parameters.Add("@DATAALTERACAO", NpgsqlTypes.NpgsqlDbType.Timestamp).Value = DBNull.Value;
 
                         var insertedId = command.ExecuteScalar();
-                        return insertedId != null ? Convert.ToInt32(insertedId) : 0;
+
+                        return insertedId != null;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Erro ao salvar agendamento: " + ex.Message);
-                return 0;
+                return false;
             }
         }
 

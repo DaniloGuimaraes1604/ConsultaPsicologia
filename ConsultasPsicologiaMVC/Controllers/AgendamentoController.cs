@@ -5,21 +5,22 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using ConsultasPsicologiaMVC.ENUMS;
+using ConsultasPsicologiaMVC.BLL.Interfaces;
 
 namespace ConsultasPsicologiaMVC.Controllers
 {
     [Authorize]
     public class AgendamentoController : Controller
     {
-        private readonly IAgendamentoDao _agendamentoDao;
+        private readonly IAgendamentoBll _agendamentobll;
 
-        public AgendamentoController(IAgendamentoDao agendamentoDao)
+        public AgendamentoController(IAgendamentoBll agendamentoBll)
         {
-            _agendamentoDao = agendamentoDao;
+            _agendamentobll = agendamentoBll;
         }
 
         [HttpPost]
-        public IActionResult Salvar([FromBody] AgendamentoDto agendamentoDto)
+        public IActionResult SalvarAgendamento([FromBody] AgendamentoDto agendamentoDto)
         {
             if (ModelState.IsValid)
             {
@@ -36,13 +37,16 @@ namespace ConsultasPsicologiaMVC.Controllers
                             StatusConsulta = agendamentoDto.StatusConsulta
                         };
 
-                        var idPaciente = _agendamentoDao.ConsultaIdPaciente(agendamento.PacienteId);
-                        if (idPaciente <= 0)
+                        var idPaciente = _agendamentobll.ConsultaIdPaciente(agendamento.PacienteId);
+                        
+                        if (_agendamentobll.SalvarAgendamento(agendamento, idPaciente))
                         {
-                            throw new Exception("ID do paciente nao encontrado, por favor tente novamente");
+                            return Json(new { success = true, message = "Consulta agendada com sucesso!" });
                         }
-                        _agendamentoDao.SalvarAgendamento(agendamento, idPaciente);
-                        return Json(new { success = true, message = "Consulta agendada com sucesso!" });
+                        else 
+                        {
+                            return Json(new { success = false, message = "Erro ao salvar a consulta, por favor tente novamente!" });
+                        }
                     }
                     else
                     {

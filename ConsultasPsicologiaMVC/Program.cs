@@ -14,10 +14,16 @@ builder.Services.AddControllersWithViews()
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
-builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAdminDao, ConsultasPsicologiaMVC.DAO.Implementations.AdminDao>(); // Added
+// Camada BLL
+builder.Services.AddScoped<ConsultasPsicologiaMVC.BLL.Interfaces.IAgendamentoBll, ConsultasPsicologiaMVC.BLL.AgendamentoBLL>();
+builder.Services.AddScoped<ConsultasPsicologiaMVC.BLL.Interfaces.ICadastroBll, ConsultasPsicologiaMVC.BLL.CadastroBLL>();
+
+
+// Camada DAO
 builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAgendamentoDao, ConsultasPsicologiaMVC.DAO.Implementations.AgendamentoDao>();
 builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.ICadastroDao, ConsultasPsicologiaMVC.DAO.Implementations.CadastroDao>();
-builder.Services.AddScoped<ConsultasPsicologiaMVC.BLL.Interfaces.ICadastroBll, ConsultasPsicologiaMVC.BLL.CadastroBLL>();
+builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAdminDao, ConsultasPsicologiaMVC.DAO.Implementations.AdminDao>();
+
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

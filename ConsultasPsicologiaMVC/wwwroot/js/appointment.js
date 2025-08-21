@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         try {
-            const response = await fetch('/Agendamento/Salvar', {
+            const response = await fetch('/Agendamento/SalvarAgendamento', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

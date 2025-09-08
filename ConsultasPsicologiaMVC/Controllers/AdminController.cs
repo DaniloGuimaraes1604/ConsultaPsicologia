@@ -1,4 +1,3 @@
-
 using ConsultasPsicologiaMVC.BLL.Interfaces;
 using ConsultasPsicologiaMVC.DAO.Interfaces;
 using ConsultasPsicologiaMVC.Models;
@@ -9,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using System.IO;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ConsultasPsicologiaMVC.Controllers
@@ -89,7 +89,7 @@ namespace ConsultasPsicologiaMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string email)
         {
-            if (User.Identity?.IsAuthenticated != true || User.Identity.Name != "caroline.adm@adm.com")
+            if (User.Identity?.IsAuthenticated != true || User.FindFirst(ClaimTypes.Email)?.Value.ToLower() != "caroline.adm@adm.com")
             {
                 return Forbid();
             }
@@ -106,7 +106,7 @@ namespace ConsultasPsicologiaMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(PacienteEditViewModel model)
         {
-            if (User.Identity?.IsAuthenticated != true || User.Identity.Name != "caroline.adm@adm.com")
+            if (User.Identity?.IsAuthenticated != true || User.FindFirst(ClaimTypes.Email)?.Value.ToLower() != "caroline.adm@adm.com")
             {
                 return Forbid();
             }

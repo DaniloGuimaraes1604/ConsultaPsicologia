@@ -48,38 +48,6 @@ namespace ConsultasPsicologiaMVC.DAO.Implementations
             return user;
         }
 
-        public async Task<Cadastrar> ValidarLogin(string email, string senha)
-        {
-            var user = await BuscarUsuarioPorEmail(email);
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            string storedPasswordHash = user.Senha;
-
-            // Extrair salt e hash da senha armazenada
-            byte[] hashBytes = Convert.FromBase64String(storedPasswordHash);
-            byte[] salt = new byte[16];
-            Array.Copy(hashBytes, 0, salt, 0, 16);
-
-            // Hashear a senha fornecida com o salt extraído
-            var pbkdf2 = new Rfc2898DeriveBytes(senha, salt, 10000, HashAlgorithmName.SHA256);
-            byte[] providedPasswordHash = pbkdf2.GetBytes(20);
-
-            // Comparar os hashes
-            bool passwordMatch = true;
-            for (int i = 0; i < 20; i++)
-            {
-                if (hashBytes[i + 16] != providedPasswordHash[i])
-                {
-                    passwordMatch = false;
-                    break;
-                }
-            }
-
-            return passwordMatch ? user : null;
-        }
+        
     }
 }

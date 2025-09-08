@@ -36,7 +36,7 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Página Inicial</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated && User.Identity.Name == "caroline.adm@adm.com")
+                        @if (User.Identity.IsAuthenticated && User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value.ToLower() == "caroline.adm@adm.com")
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">

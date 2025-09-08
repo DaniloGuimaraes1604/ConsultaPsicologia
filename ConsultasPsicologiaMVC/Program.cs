@@ -17,12 +17,15 @@ builder.Services.AddControllersWithViews()
 // Camada BLL
 builder.Services.AddScoped<ConsultasPsicologiaMVC.BLL.Interfaces.IAgendamentoBll, ConsultasPsicologiaMVC.BLL.AgendamentoBLL>();
 builder.Services.AddScoped<ConsultasPsicologiaMVC.BLL.Interfaces.ICadastroBll, ConsultasPsicologiaMVC.BLL.CadastroBLL>();
+builder.Services.AddScoped<ConsultasPsicologiaMVC.BLL.Interfaces.ILoginBll, ConsultasPsicologiaMVC.BLL.LoginBLL>();
+builder.Services.AddScoped<ConsultasPsicologiaMVC.BLL.Interfaces.IAdminBll, ConsultasPsicologiaMVC.BLL.AdminBLL>();
 
 
 // Camada DAO
 builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAgendamentoDao, ConsultasPsicologiaMVC.DAO.Implementations.AgendamentoDao>();
 builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.ICadastroDao, ConsultasPsicologiaMVC.DAO.Implementations.CadastroDao>();
 builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.IAdminDao, ConsultasPsicologiaMVC.DAO.Implementations.AdminDao>();
+builder.Services.AddScoped<ConsultasPsicologiaMVC.DAO.Interfaces.ILoginDao, ConsultasPsicologiaMVC.DAO.Implementations.LoginDao>();
 
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

@@ -9,6 +9,7 @@ namespace ConsultasPsicologiaMVC.Controllers
        
         public IActionResult Index()
         {
+            // Test comment
             HomeModel home = new HomeModel();
 
             home.Nome = "Danilo";

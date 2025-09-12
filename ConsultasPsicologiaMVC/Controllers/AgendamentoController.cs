@@ -38,8 +38,13 @@ namespace ConsultasPsicologiaMVC.Controllers
                         };
 
                         var idPaciente = _agendamentobll.ConsultaIdPaciente(agendamento.PacienteId);
-                        
-                        if (_agendamentobll.SalvarAgendamento(agendamento, idPaciente))
+
+                        if (idPaciente.Ativo == 0)
+                        {
+                            return Json(new { success = false, message = "Usuário bloqueado para agendamento de consultas, entre em contato com a clinica." });
+                        }
+
+                        if (_agendamentobll.SalvarAgendamento(agendamento, idPaciente.Id))
                         {
                             return Json(new { success = true, message = "Consulta agendada com sucesso!" });
                         }

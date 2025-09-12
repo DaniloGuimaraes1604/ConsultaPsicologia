@@ -8,17 +8,11 @@ namespace ConsultasPsicologiaMVC.Models
 
         public string Nome { get; set; } = string.Empty;
 
-        [NotMapped]
-        public string Sobrenome { get; set; } = string.Empty;
-
         public DateTime? DataNascimento { get; set; }
 
         public string Email { get; set; } = string.Empty;
 
         public string Senha { get; set; } = string.Empty;
-
-        [NotMapped]
-        public string SenhaDigitadaNovamente { get; set; } = string.Empty;
 
         public bool Ativo { get; set; } = true;
 

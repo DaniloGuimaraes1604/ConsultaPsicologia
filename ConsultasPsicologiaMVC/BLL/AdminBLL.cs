@@ -24,17 +24,17 @@ namespace ConsultasPsicologiaMVC.BLL
                 return null;
             }
 
-            // In a real scenario, you would map the properties from the domain model (Cadastrar)
-            // to the view model (PacienteEditViewModel). The extra properties would come from other sources.
+            var qtdConsultaPac = _adminDao.QuantidadeDeConsultaPaciente(paciente.Id);
+
             var model = new PacienteEditViewModel
             {
                 Email = paciente.Email,
                 NomeCompleto = paciente.Nome,
                 DataNascimento = paciente.DataNascimento,
-                Observacao = "Esta é uma observação mockada para o paciente.", // Mocked data
-                QuantidadeConsultas = 5, // Mocked data
-                NotaPaciente = 4.5, // Mocked data
-                PacienteBloqueado = !paciente.Ativo // Example of mapping logic
+                Observacao = "Esta é uma observação mockada para o paciente.", 
+                QuantidadeConsultas = qtdConsultaPac,
+                NotaPaciente = 4.5, 
+                PacienteBloqueado = !paciente.Ativo
             };
 
             return model;
@@ -45,7 +45,7 @@ namespace ConsultasPsicologiaMVC.BLL
             var paciente = await _adminDao.BuscarPacientePorEmail(model.Email);
             if (paciente == null)
             {
-                return false; // Or throw an exception
+                return false; 
             }
 
             // Map updated fields from the view model back to the domain model

@@ -10,17 +10,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const onlineAppointmentRadio = document.getElementById('onlineAppointment');
     const presentialAppointmentRadio = document.getElementById('presentialAppointment');
     const appointmentValueGroup = document.getElementById('appointmentValueGroup');
-    const appointmentValueInput = document.getElementById('appointmentValue');
+    const appointmentValueDisplay = document.getElementById('appointmentValueDisplay');
+    const appointmentValueHidden = document.getElementById('appointmentValueHidden');
 
     function updateAppointmentValue() {
         if (onlineAppointmentRadio.checked) {
-            appointmentValueInput.value = 'R$ 100,00';
+            appointmentValueDisplay.innerText = 'R$ 100,00';
+            appointmentValueHidden.value = 100.00;
             appointmentValueGroup.style.display = 'block';
         } else if (presentialAppointmentRadio.checked) {
-            appointmentValueInput.value = 'R$ 180,00';
+            appointmentValueDisplay.innerText = 'R$ 180,00';
+            appointmentValueHidden.value = 180.00;
             appointmentValueGroup.style.display = 'block';
         } else {
-            appointmentValueInput.value = '';
+            appointmentValueDisplay.innerText = '';
+            appointmentValueHidden.value = '';
             appointmentValueGroup.style.display = 'none';
         }
     }
@@ -180,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
             hora: hiddenTimeValue, // Send time separately
             tipoConsulta: selectedAppointmentType.value,
             pacienteId: pacienteId,
-            valorConsulta: parseFloat(appointmentValueInput.value.replace('R$', '').replace(',', '.').trim()),
+            valorConsulta: parseFloat(appointmentValueHidden.value),
             statusConsulta: 1 // Assuming 1 means 'Agendado'
         };
 

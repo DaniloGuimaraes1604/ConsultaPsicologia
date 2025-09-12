@@ -144,3 +144,27 @@
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
 }
+
+/* Estilização para o Bloco de Valor da Consulta */
+.valor-consulta-display {
+    background-color: #f8f9fa; /* Um cinza bem claro */
+    border-radius: 8px;
+    padding: 8px; /* Diminuído novamente */
+    text-align: center;
+    border: 1px solid #e9ecef;
+}
+
+.valor-consulta-label {
+    font-size: 1.1rem; /* Aumentado novamente */
+    color: #6c757d; /* Cinza secundário do Bootstrap */
+    margin-bottom: 2px; /* Ajustado */
+    display: block; /* Garante que o label fique em sua própria linha */
+}
+
+.valor-consulta-preco {
+    font-size: 1.6rem; /* Diminuído novamente */
+    font-weight: 700; /* Bold */
+    color: var(--primary-color); /* Alterado para o verde do site */
+    margin: 0; /* Remove a margem padrão do <p> */
+    line-height: 1.2;
+}

@@ -127,5 +127,36 @@ namespace ConsultasPsicologiaMVC.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult GetConsultas(
+            int page = 1,
+            int pageSize = 15,
+            string? nomeCompleto = null,
+            string? nomeCompletoType = null,
+            string? dataNascimento = null,
+            string? dataNascimentoType = null,
+            string? email = null,
+            string? emailType = null)
+        {
+            var (pacientes, totalCount) = _adminDao.GetFilteredAndPagedConsultas(
+                page,
+                pageSize,
+                nomeCompleto,
+                nomeCompletoType,
+                dataNascimento,
+                dataNascimentoType,
+                email,
+                emailType
+            );
+
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            return Json(new
+            {
+                html = RenderPartialViewToString("_ConsultaTableRows", pacientes),
+                totalPages = totalPages
+            });
+        }
     }
 }

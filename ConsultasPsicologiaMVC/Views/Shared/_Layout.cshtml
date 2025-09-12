@@ -179,8 +179,12 @@
                     <div id="timeSlots" class="mt-3"></div>
                 </div>
                 <div class="mb-3" id="appointmentValueGroup" style="display: none;">
-                    <label for="appointmentValue">Valor da Consulta:</label>
-                    <input type="text" id="appointmentValue" class="form-control" readonly>
+                    <!-- Bloco de valor da consulta estilizado -->
+                    <div class="valor-consulta-display">
+                        <label class="valor-consulta-label">Valor da Consulta:</label>
+                        <p class="valor-consulta-preco" id="appointmentValueDisplay"></p>
+                    </div>
+                    <input type="hidden" id="appointmentValueHidden" name="AppointmentValue">
                 </div>
                 <button type="submit" class="btn btn-primary">Confirmar Agendamento</button>
             </form>

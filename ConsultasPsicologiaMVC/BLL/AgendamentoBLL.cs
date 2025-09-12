@@ -26,15 +26,16 @@ namespace ConsultasPsicologiaMVC.BLL
         }
 
 
-        public int ConsultaIdPaciente(string emailPaciente) 
+        public PacienteDto ConsultaIdPaciente(string emailPaciente) 
         {
-            var idPaciente = _agendamentoDao.ConsultaIdPaciente(emailPaciente);
-            if (idPaciente <= 0)
+            PacienteDto paciente = _agendamentoDao.ConsultaIdPaciente(emailPaciente);
+            
+            if (paciente.Id <= 0)
             {
                 throw new Exception("ID do paciente nao encontrado, por favor tente novamente");
             }
 
-            return idPaciente;
+            return paciente;
         }
     }
 }

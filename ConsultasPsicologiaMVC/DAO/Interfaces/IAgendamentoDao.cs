@@ -7,6 +7,6 @@ namespace ConsultasPsicologiaMVC.DAO.Interfaces
     {
         bool SalvarAgendamento(Agendamento dadosAgendamento, int idPaciente);
 
-        int ConsultaIdPaciente(string email);
+        PacienteDto ConsultaIdPaciente(string email);
     }
 }

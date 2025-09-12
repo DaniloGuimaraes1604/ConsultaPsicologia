@@ -14,13 +14,14 @@ namespace ConsultasPsicologiaMVC.DAO.Implementations
             _connection = connection;
         }
 
-        public int ConsultaIdPaciente(string emailPaciente)
+        public PacienteDto ConsultaIdPaciente(string emailPaciente)
         {
-            int pacienteId = 0;
+            PacienteDto paciente = new();
+
             using (var connection = new NpgsqlConnection(_connection.ConnectionString))
             {
                 connection.Open();
-                var sql = "select ID from USUARIOPACIENTE where email = EMAIL";
+                var sql = $"select ID, ATIVO from USUARIOPACIENTE where email = :EMAIL";
                 using (var command = new NpgsqlCommand(sql, connection))
                 {
                     command.Parameters.Add("EMAIL", NpgsqlTypes.NpgsqlDbType.Varchar, 255).Value = emailPaciente;
@@ -29,11 +30,12 @@ namespace ConsultasPsicologiaMVC.DAO.Implementations
                     {
                         if (reader.Read())
                         {
-                           pacienteId = reader.GetInt32(0);
+                           paciente.Id = reader.GetInt32(0);
+                           paciente.Ativo = reader.GetInt32(1);
                         }
                     }
                 }
-                return pacienteId;
+                return paciente;
             }
         }
 

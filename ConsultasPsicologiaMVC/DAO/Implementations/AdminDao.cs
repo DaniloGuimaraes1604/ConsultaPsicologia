@@ -5,6 +5,7 @@ using System.Data;
 using System.Threading.Tasks;
 using Npgsql;
 using System;
+using ConsultasPsicologiaMVC.ENUMS;
 
 namespace ConsultasPsicologiaMVC.DAO.Implementations
 {
@@ -308,144 +309,116 @@ namespace ConsultasPsicologiaMVC.DAO.Implementations
         }
 
 
-        public (List<AgendamentoDto> pacientes, int totalCount) GetFilteredAndPagedConsultas(
+        public (List<AgendamentoDto> consultas, int totalCount) RegistroConsultas(
             int page,
             int pageSize,
             string nomeCompleto,
             string nomeCompletoType,
-            string dataNascimento,
-            string dataNascimentoType,
-            string email,
-            string emailType)
+            string dataConsulta,
+            string dataConsultaType,
+            string horaConsulta,
+            string horaConsultaType,
+            string tipoConsulta,
+            string tipoConsultaType,
+            string statusConsulta,
+            string statusConsultaType)
         {
-            var pacientes = new List<AgendamentoDto>();
+            var consultas = new List<AgendamentoDto>();
             int totalCount = 0;
-
-            try // Outer try-catch for the entire method
+            try
             {
                 using (var connection = new NpgsqlConnection(_connection.ConnectionString))
                 {
-                    connection.Open(); // Consider changing to OpenAsync() if the method becomes async
+                    connection.Open();
 
-                    var countSql = "SELECT COUNT(*) FROM usuariopaciente WHERE 1=1";
-                    var selectSql = "SELECT id, nome, datanascimento, email FROM usuariopaciente WHERE 1=1";
+                    var fromClause = @"FROM REGISTROCONSULTA r
+                               JOIN usuariopaciente u ON r.pacienteid = u.id";
+
+                    var countSql = $"SELECT COUNT(r.id) {fromClause} WHERE 1=1";
+                    var selectSql = @$"SELECT r.id, u.nome, r.datahoraconsulta, r.horaconsulta, r.tipoconsultaid, r.statusconsulta, r.pacienteid
+                               {fromClause} WHERE 1=1";
 
                     var parameters = new List<NpgsqlParameter>();
 
-                    // Apply filters
+
                     if (!string.IsNullOrEmpty(nomeCompleto))
                     {
-                        if (nomeCompletoType == "equals")
-                        {
-                            countSql += " AND UPPER(nome) = UPPER(@nomeCompleto)";
-                            selectSql += " AND UPPER(nome) = UPPER(@nomeCompleto)";
-                            parameters.Add(new NpgsqlParameter("nomeCompleto", nomeCompleto));
-                        }
-                        else // contains
-                        {
-                            countSql += " AND UPPER(nome) LIKE UPPER(@nomeCompleto)";
-                            selectSql += " AND UPPER(nome) LIKE UPPER(@nomeCompleto)";
-                            parameters.Add(new NpgsqlParameter("nomeCompleto", "%" + nomeCompleto + "%"));
-                        }
+                        var condition = nomeCompletoType == "equals" ? "= UPPER(@nomeCompleto)" : "LIKE UPPER(@nomeCompleto)";
+                        var paramValue = nomeCompletoType == "equals" ? nomeCompleto : $"%{nomeCompleto}%";
+                        countSql += $" AND UPPER(u.nome) {condition}";
+                        selectSql += $" AND UPPER(u.nome) {condition}";
+                        parameters.Add(new NpgsqlParameter("nomeCompleto", paramValue));
                     }
 
-                    if (!string.IsNullOrEmpty(dataNascimento))
+                    if (DateTime.TryParse(dataConsulta, out DateTime parsedDate))
                     {
-                        if (DateTime.TryParse(dataNascimento, out DateTime parsedDate))
-                        {
-                            // For date, we assume 'equals' means the exact date
-                            // Consider using date_trunc for more robust date comparison if time component is an issue
-                            countSql += " AND datanascimento = @dataNascimento";
-                            selectSql += " AND datanascimento = @dataNascimento";
-                            parameters.Add(new NpgsqlParameter("dataNascimento", parsedDate));
-                        }
+                        var op = dataConsultaType == "greater" ? ">=" : (dataConsultaType == "less" ? "<=" : "=");
+                        countSql += $" AND r.datahoraconsulta {op} @dataConsulta";
+                        selectSql += $" AND r.datahoraconsulta {op} @dataConsulta";
+                        parameters.Add(new NpgsqlParameter("dataConsulta", parsedDate));
                     }
 
-                    if (!string.IsNullOrEmpty(email))
+                    if (!string.IsNullOrEmpty(tipoConsulta) && int.TryParse(tipoConsulta, out int tipoConsultaInt))
                     {
-                        if (emailType == "equals")
-                        {
-                            countSql += " AND UPPER(email) = UPPER(@email)";
-                            selectSql += " AND UPPER(email) = UPPER(@email)";
-                            parameters.Add(new NpgsqlParameter("email", email));
-                        }
-                        else // contains
-                        {
-                            countSql += " AND UPPER(email) LIKE UPPER(@email)";
-                            selectSql += " AND UPPER(email) LIKE UPPER(@email)";
-                            parameters.Add(new NpgsqlParameter("email", "%" + email + "%"));
-                        }
+                        countSql += " AND r.tipoconsultaid = @tipoConsulta";
+                        selectSql += " AND r.tipoconsultaid = @tipoConsulta";
+                        parameters.Add(new NpgsqlParameter("tipoConsulta", tipoConsultaInt));
                     }
 
-                    Console.WriteLine($"[DEBUG] Count SQL: {countSql}");
-                    Console.WriteLine($"[DEBUG] Select SQL: {selectSql}");
-                    foreach (var p in parameters)
+                    if (int.TryParse(statusConsulta, out int parsedStatus))
                     {
-                        Console.WriteLine($"[DEBUG] Parameter: {p.ParameterName} = {p.Value}");
+                        countSql += " AND r.statusconsulta = @statusConsulta";
+                        selectSql += " AND r.statusconsulta = @statusConsulta";
+                        parameters.Add(new NpgsqlParameter("statusConsulta", parsedStatus));
                     }
 
-                    // Get total count
-                    try
+
+                    using (var command = new NpgsqlCommand(countSql, connection))
                     {
-                        using (var command = new NpgsqlCommand(countSql, connection))
-                        {
-                            command.Parameters.AddRange(parameters.ToArray());
-                            totalCount = Convert.ToInt32(command.ExecuteScalar());
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"[ERROR] Error getting total count: {ex.Message}");
-                        throw; // Re-throw to propagate the error
+                        command.Parameters.AddRange(parameters.ToArray());
+                        totalCount = Convert.ToInt32(command.ExecuteScalar());
                     }
 
-                    // Apply pagination
-                    selectSql += " ORDER BY nome LIMIT @pageSize OFFSET @offset";
+                    selectSql += " ORDER BY r.datahoraconsulta DESC, r.horaconsulta DESC LIMIT @pageSize OFFSET @offset";
 
-                    // Create a NEW list of parameters for the select command, performing a deep copy of existing parameters
                     var selectParameters = new List<NpgsqlParameter>();
                     foreach (var p in parameters)
                     {
-                        selectParameters.Add(new NpgsqlParameter(p.ParameterName, p.Value)); // Deep copy
+                        selectParameters.Add(new NpgsqlParameter(p.ParameterName, p.Value));
                     }
-
                     selectParameters.Add(new NpgsqlParameter("pageSize", pageSize));
                     selectParameters.Add(new NpgsqlParameter("offset", (page - 1) * pageSize));
 
-                    try
+                    using (var command = new NpgsqlCommand(selectSql, connection))
                     {
-                        using (var command = new NpgsqlCommand(selectSql, connection))
+                        command.Parameters.AddRange(selectParameters.ToArray());
+                        using (var reader = command.ExecuteReader())
                         {
-                            command.Parameters.AddRange(selectParameters.ToArray()); // Use the NEW list
-                            using (var reader = command.ExecuteReader())
+                            while (reader.Read())
                             {
-                                while (reader.Read())
+                                int status = reader.GetInt32(reader.GetOrdinal("statusconsulta"));
+                                consultas.Add(new AgendamentoDto
                                 {
-                                    pacientes.Add(new AgendamentoDto
-                                    {
-                                        Id = reader.GetInt32(0),
-                                        //NomeCompleto = reader.GetString(1),
-                                        //PacienteId = reader.IsDBNull(2) ? (DateTime?)null : reader.GetDateTime(2),
-                                        //Email = reader.GetString(3)
-                                    });
-                                }
+                                    Id = reader.GetInt32(reader.GetOrdinal("id")),
+                                    NomeCompleto = reader.GetString(reader.GetOrdinal("nome")),
+                                    Data = reader.GetDateTime(reader.GetOrdinal("datahoraconsulta")).ToString("dd/MM/yyyy"),
+                                    Hora = reader.GetTimeSpan(reader.GetOrdinal("horaconsulta")).ToString(@"hh\:mm"),
+                                    TipoConsulta = (ENUMTIPOCONSULTA)reader.GetInt32(reader.GetOrdinal("tipoconsultaid")),
+                                    PacienteId = reader.GetInt32(reader.GetOrdinal("pacienteid")).ToString(),
+                                    StatusConsultaString = status == 1 ? "Ativo" : "Inativo"
+                                });
+
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"[ERROR] Error executing select query: {ex.Message}");
-                        throw; // Re-throw to propagate the error
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ERROR] General error in GetFilteredAndPagedPacientes: {ex.Message}");
-                // Optionally, log inner exception or stack trace
-                throw; // Re-throw to propagate the error
+                Console.WriteLine($"[ERROR] General error in RegistroConsultas: {ex.Message}");
+                throw;
             }
-            return (pacientes, totalCount);
+            return (consultas, totalCount);
         }
     }
 }

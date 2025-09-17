@@ -54,7 +54,8 @@ namespace ConsultasPsicologiaMVC.Controllers
 
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
-            return Json(new { 
+            return Json(new
+            {
                 html = RenderPartialViewToString("_PacienteTableRows", pacientes),
                 totalPages = totalPages
             });
@@ -131,31 +132,39 @@ namespace ConsultasPsicologiaMVC.Controllers
         [HttpGet]
         public IActionResult GetConsultas(
             int page = 1,
-            int pageSize = 15,
-            string? nomeCompleto = null,
-            string? nomeCompletoType = null,
-            string? dataNascimento = null,
-            string? dataNascimentoType = null,
-            string? email = null,
-            string? emailType = null)
+            int pageSize = 10,
+            string nomeCompleto = null,
+            string nomeCompletoType = "contains",
+            string dataConsulta = null,
+            string dataConsultaType = "equals",
+            string horaConsulta = null,
+            string horaConsultaType = "equals",
+            string tipoConsulta = null,
+            string tipoConsultaType = "equals",
+            string statusConsulta = null,
+            string statusConsultaType = "equals")
         {
-            var (pacientes, totalCount) = _adminDao.GetFilteredAndPagedConsultas(
-                page,
-                pageSize,
-                nomeCompleto,
-                nomeCompletoType,
-                dataNascimento,
-                dataNascimentoType,
-                email,
-                emailType
-            );
+            var (consultas, totalCount) = _adminBll.RegistroConsultas(
+                      page,
+                      pageSize,
+                      nomeCompleto,
+                      nomeCompletoType,
+                      dataConsulta,
+                      dataConsultaType,
+                      horaConsulta,
+                      horaConsultaType,
+                      tipoConsulta,
+                      tipoConsultaType,
+                      statusConsulta,
+                      statusConsultaType);
 
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
             return Json(new
             {
-                html = RenderPartialViewToString("_ConsultaTableRows", pacientes),
-                totalPages = totalPages
+                html = RenderPartialViewToString("_ConsultaTableRows", consultas),
+                totalPages = totalPages,
+                currentPage = page
             });
         }
     }

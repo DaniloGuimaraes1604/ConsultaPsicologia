@@ -25,15 +25,19 @@ namespace ConsultasPsicologiaMVC.DAO.Interfaces
         int QuantidadeDeConsultaPaciente(int pacienteId);
 
 
-        (List<AgendamentoDto> pacientes, int totalCount) GetFilteredAndPagedConsultas(
-           int page,
-           int pageSize,
-           string nomeCompleto,
-           string nomeCompletoType,
-           string dataNascimento,
-           string dataNascimentoType,
-           string email,
-           string emailType
+        (List<AgendamentoDto> consultas, int totalCount) RegistroConsultas(
+            int page,
+            int pageSize,
+            string nomeCompleto,
+            string nomeCompletoType,
+            string dataConsulta,
+            string dataConsultaType,
+            string horaConsulta,
+            string horaConsultaType,
+            string tipoConsulta,
+            string tipoConsultaType,
+            string statusConsulta,
+            string statusConsultaType
        );
     }
 }

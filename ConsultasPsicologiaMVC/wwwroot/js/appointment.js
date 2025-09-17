@@ -185,7 +185,9 @@ document.addEventListener('DOMContentLoaded', function () {
             tipoConsulta: selectedAppointmentType.value,
             pacienteId: pacienteId,
             valorConsulta: parseFloat(appointmentValueHidden.value),
-            statusConsulta: 1 // Assuming 1 means 'Agendado'
+            statusConsulta: 1, // Assuming 1 means 'Agendado'
+            nomeCompleto: "",
+            statusConsultaString: ""
         };
 
         try {

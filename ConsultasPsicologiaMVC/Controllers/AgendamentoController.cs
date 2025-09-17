@@ -63,7 +63,9 @@ namespace ConsultasPsicologiaMVC.Controllers
                     return Json(new { success = false, message = "Ocorreu um erro ao salvar a consulta: " + ex.Message });
                 }
             }
-            return Json(new { success = false, message = "Dados inválidos." });
+
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+            return Json(new { success = false, message = "Dados inválidos.", errors = errors });
         }
     }
 }

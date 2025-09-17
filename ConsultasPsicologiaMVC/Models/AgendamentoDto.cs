@@ -9,6 +9,8 @@ namespace ConsultasPsicologiaMVC.Models
         public string Hora { get; set; }
         public ENUMTIPOCONSULTA TipoConsulta { get; set; }
         public string PacienteId { get; set; }
+        public string NomeCompleto { get; set; }
+        public string StatusConsultaString { get; set; }
         public double ValorConsulta { get; set; }
         public int StatusConsulta { get; set; }
     }

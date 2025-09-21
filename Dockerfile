@@ -11,8 +11,7 @@ COPY . .
 WORKDIR "/src/ConsultasPsicologiaMVC"
 
 # Compila e publica a aplicação
-RUN dotnet build "ConsultasPsicologiaMVC.csproj" -c Release -o /app/build
-RUN dotnet publish "ConsultasPsicologiaMVC.csproj" -c Release -o /app/publish --no-build
+RUN dotnet publish "ConsultasPsicologiaMVC.csproj" -c Release -o /app/publish
 
 # Estágio 2: Imagem final de execução
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
